@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31B1644A30AC880C2119634D /* Pods_fBDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A243603939D4FC6A5E3AE34 /* Pods_fBDemo.framework */; };
 		A53E7E91221AB5C900D6000E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53E7E90221AB5C900D6000E /* AppDelegate.swift */; };
 		A53E7E93221AB5C900D6000E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53E7E92221AB5C900D6000E /* ViewController.swift */; };
 		A53E7E96221AB5C900D6000E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A53E7E94221AB5C900D6000E /* Main.storyboard */; };
 		A53E7E98221AB5D800D6000E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A53E7E97221AB5D800D6000E /* Assets.xcassets */; };
 		A53E7E9B221AB5D800D6000E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A53E7E99221AB5D800D6000E /* LaunchScreen.storyboard */; };
+		A5437204221BD81F00532472 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5437203221BD81F00532472 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F899118325B2A36BE970EEA /* Pods-fBDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fBDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-fBDemo/Pods-fBDemo.release.xcconfig"; sourceTree = "<group>"; };
+		6A243603939D4FC6A5E3AE34 /* Pods_fBDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fBDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53E7E8D221AB5C900D6000E /* fBDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fBDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A53E7E90221AB5C900D6000E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A53E7E92221AB5C900D6000E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		A53E7E97221AB5D800D6000E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A53E7E9A221AB5D800D6000E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A53E7E9C221AB5D800D6000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5437203221BD81F00532472 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FD186035CB5B1EF7E93A0CB2 /* Pods-fBDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fBDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fBDemo/Pods-fBDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31B1644A30AC880C2119634D /* Pods_fBDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		16C744950DD85996FADBD7E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FD186035CB5B1EF7E93A0CB2 /* Pods-fBDemo.debug.xcconfig */,
+				0F899118325B2A36BE970EEA /* Pods-fBDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7A38F26BEA4679B7B6719F14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6A243603939D4FC6A5E3AE34 /* Pods_fBDemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A53E7E84221AB5C900D6000E = {
 			isa = PBXGroup;
 			children = (
 				A53E7E8F221AB5C900D6000E /* fBDemo */,
 				A53E7E8E221AB5C900D6000E /* Products */,
+				16C744950DD85996FADBD7E0 /* Pods */,
+				7A38F26BEA4679B7B6719F14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,6 +85,7 @@
 				A53E7E94221AB5C900D6000E /* Main.storyboard */,
 				A53E7E97221AB5D800D6000E /* Assets.xcassets */,
 				A53E7E99221AB5D800D6000E /* LaunchScreen.storyboard */,
+				A5437203221BD81F00532472 /* GoogleService-Info.plist */,
 				A53E7E9C221AB5D800D6000E /* Info.plist */,
 			);
 			path = fBDemo;
@@ -71,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A53E7E9F221AB5D800D6000E /* Build configuration list for PBXNativeTarget "fBDemo" */;
 			buildPhases = (
+				CFBCDEFBF4E0833BB750895E /* [CP] Check Pods Manifest.lock */,
 				A53E7E89221AB5C900D6000E /* Sources */,
 				A53E7E8A221AB5C900D6000E /* Frameworks */,
 				A53E7E8B221AB5C900D6000E /* Resources */,
+				F7B3870CDC993D58B869D68A /* [CP] Embed Pods Frameworks */,
+				EFC1AD2D941E9EF7CCC99D1C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -124,11 +154,89 @@
 			files = (
 				A53E7E9B221AB5D800D6000E /* LaunchScreen.storyboard in Resources */,
 				A53E7E98221AB5D800D6000E /* Assets.xcassets in Resources */,
+				A5437204221BD81F00532472 /* GoogleService-Info.plist in Resources */,
 				A53E7E96221AB5C900D6000E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CFBCDEFBF4E0833BB750895E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fBDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFC1AD2D941E9EF7CCC99D1C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-fBDemo/Pods-fBDemo-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fBDemo/Pods-fBDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7B3870CDC993D58B869D68A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-fBDemo/Pods-fBDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookLogin/FacebookLogin.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookShare/FacebookShare.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookLogin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookShare.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fBDemo/Pods-fBDemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A53E7E89221AB5C900D6000E /* Sources */ = {
@@ -280,6 +388,7 @@
 		};
 		A53E7EA0221AB5D800D6000E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD186035CB5B1EF7E93A0CB2 /* Pods-fBDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +407,7 @@
 		};
 		A53E7EA1221AB5D800D6000E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F899118325B2A36BE970EEA /* Pods-fBDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
