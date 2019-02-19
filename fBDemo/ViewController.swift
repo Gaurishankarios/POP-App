@@ -9,9 +9,13 @@
 import UIKit
 import FacebookLogin
 import FacebookCore
+import Firebase
+import GoogleSignIn
 
-class ViewController: UIViewController,LoginButtonDelegate {
+class ViewController: UIViewController,LoginButtonDelegate, GIDSignInUIDelegate {
 
+     @IBOutlet weak var signInButton: GIDSignInButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
  
@@ -31,6 +35,10 @@ class ViewController: UIViewController,LoginButtonDelegate {
         if let accessToken = AccessToken.current {
             getFBUserInfo()
         }
+        
+        
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
         
         
         
