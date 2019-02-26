@@ -22,6 +22,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         
+        let status = UserDefaults.standard.bool(forKey: "userlogin") ?? false
+//
+//        if status{
+//            let rootViewController = self.window!.rootViewController as! UINavigationController
+//            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//            let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+//            rootViewController.pushViewController(profileViewController, animated: true)
+//        }
+        
+        if status{
+            let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            
+//             let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+            
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = testController
+        }
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
@@ -36,9 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             return SDKApplicationDelegate.shared.application(app, open: url, options: options)
         }
 //        return false
+        else{
         return GIDSignIn.sharedInstance().handle(url,
                                                  sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
                                                  annotation: [:])
+        }
+        
     }
     
     
@@ -53,6 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         // ...
+        
+       
+        
         if error != nil {
             // ...
             return
@@ -71,6 +94,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 return
             }
             else{
+                
+                let rootViewController = self.window!.rootViewController as! UINavigationController
+                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                rootViewController.pushViewController(profileViewController, animated: true)
+                
+                
                 print("Google Authentification Success")
                 
                 let userId = user.userID                  // For client-side use only!
@@ -80,6 +110,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 let familyName = user.profile.familyName
                 let email = user.profile.email
                 print("user detail is \(String(describing: userId)) id token is \(String(describing: idToken)) \n full name is \(String(describing: fullName)) \n given name is \(String(describing: givenName)) \n family name is \(String(describing: familyName))\n email is \(String(describing: email))")
+                
+                UserDefaults.standard.set(true, forKey: "userlogin")
             }
             // User is signed in
             // ...
@@ -113,4 +145,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
 
 }
+
+
 
