@@ -108,34 +108,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search Restaurant" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xbH-b2-AD8">
-                                <rect key="frame" x="0.0" y="32" width="296" height="56"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="55" y="32" width="270" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="8xa-kE-H6X" id="XL4-xk-A0O"/>
                                 </connections>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7kw-jV-Yyh">
-                                <rect key="frame" x="304" y="32" width="55" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="add-to-cart.png"/>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ms1-82-ik1">
                                 <rect key="frame" x="0.0" y="96" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.67437065972222221" green="0.69803921568627447" blue="0.043137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.8901960784313725" green="0.92156862745098034" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </scrollView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="siZ-tM-iKe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="siZ-tM-iKe">
                                 <rect key="frame" x="0.0" y="154" width="375" height="513"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="LnW-nZ-uHS" id="UcP-iR-y4Z"/>
+                                    <outlet property="delegate" destination="LnW-nZ-uHS" id="z1a-47-fjA"/>
+                                </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7kw-jV-Yyh">
+                                <rect key="frame" x="325" y="43" width="34" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="add-to-cart.png"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbQ-sk-aUC">
+                                <rect key="frame" x="7" y="43" width="35" height="34"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back" image="back-navigational.png"/>
+                                <connections>
+                                    <action selector="btnBackPress:" destination="LnW-nZ-uHS" eventType="touchUpInside" id="BFO-We-0XJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="OZq-GF-tLE"/>
                     </view>
                     <connections>
                         <outlet property="scrollViewBtn" destination="ms1-82-ik1" id="Ybx-Dl-CIS"/>
+                        <outlet property="tblMenus" destination="siZ-tM-iKe" id="qz4-Oz-flo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hLO-d2-pVl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -164,6 +177,7 @@
     <resources>
         <image name="add-to-cart.png" width="64" height="64"/>
         <image name="arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png" width="512" height="512"/>
+        <image name="back-navigational.png" width="32" height="32"/>
         <image name="iconmonstr-location-pin-thin.png" width="240" height="240"/>
     </resources>
 </document>
