@@ -14,9 +14,14 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
    
     var arrRes = [[String:AnyObject]]()
     var arrCatagory:Array<Any> = []
+    var countofCart = 0
+    
+    
+    
     //    let cellReuseIdentifier = "cell"
     private let cellReuseIdentifier: String = "cell"
 
+    @IBOutlet weak var lblcartNum: UILabel!
     @IBOutlet weak var tblMenus: UITableView!
     @IBOutlet weak var scrollViewBtn: UIScrollView!
     var buttonPadding:CGFloat = 10
@@ -41,9 +46,20 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tblMenus.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
         tblMenus.backgroundColor = UIColor.clear
         
+        
+        lblcartNum.layer.cornerRadius = lblcartNum.frame.width/2
+        lblcartNum.layer.masksToBounds = true
+        
+        
+        if countofCart == 0{
+            lblcartNum.isHidden = true
+        }else{
+            lblcartNum.isHidden = false
+        }
+        
          self.navigationController?.isNavigationBarHidden = false
         
-        let urllink = "http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/1001"
+        let urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1001"
         Alamofire.request(urllink).responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
                 let swiftyJsonVar = JSON(responseData.result.value!)
@@ -64,6 +80,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //MARK: Design of scroll btn
     func UIJscrollBtn(){
+        
+        
         for i in 0...7{
            
             let button = UIButton()
@@ -91,31 +109,31 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if sender.tag == 0{
             arrRes.removeAll()
             print("button 0 press")
-             urllink = "http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/1001"
+             urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1001"
             
             
         }else if sender.tag == 1{
             print("button 1 press")
             arrRes.removeAll()
-            urllink = "http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/1002"
+            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1002"
         }else if sender.tag == 2{
             print("button 1 press")
             arrRes.removeAll()
-            urllink = "http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/1003"
+            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1003"
         }else if sender.tag == 3{
             arrRes.removeAll()
-            urllink = "http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/1004"
+            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1004"
         }else if sender.tag == 4{
             print("button 1 press")
             arrRes.removeAll()
-            urllink = "http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/1005"
+            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1005"
         }else if sender.tag == 5{
             print("button 1 press")
             arrRes.removeAll()
-            urllink = "http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/1006"
+            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1006"
         }else if sender.tag == 6{
             arrRes.removeAll()
-            urllink = "http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/1007"
+            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1007"
         }
         else if sender.tag == 7{
             self.dismiss(animated: true, completion: nil)
@@ -155,7 +173,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let imgMenus = UIImageView(frame: CGRect(x: 20, y: 0, width: UIScreen.main.bounds.size.width-40, height: 110) )
                 var imageUrlString = dict["menuImage"]as! String
-                imageUrlString = "http://192.168.1.164:8080" + imageUrlString
+                imageUrlString = "http://192.168.1.5:8080" + imageUrlString
                  let imageUrl:URL = URL(string: imageUrlString)!
         
                 // Start background thread so that image loading does not make app unresponsive
@@ -202,6 +220,10 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @objc func btnAddTocart(sender:UIButton){
         print("\(sender.tag)")
+        lblcartNum.isHidden = false
+        countofCart = countofCart + 1
+        lblcartNum.text = "\(countofCart)"
+        
     }
     
 

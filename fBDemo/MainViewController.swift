@@ -33,7 +33,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         serchBarview.delegate = self
         
-        Alamofire.request("http://192.168.1.164:8080/api/restaurant/list").responseJSON { (responseData) -> Void in
+        Alamofire.request("http://192.168.1.5:8080/api/restaurant/list").responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
                 let swiftyJsonVar = JSON(responseData.result.value!)
                 print(swiftyJsonVar)
@@ -58,18 +58,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-//        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
 
         var dict = arrRes[indexPath.row]
         
         let imgHotel = UIImageView(frame: CGRect(x: 20, y: 5, width: UIScreen.main.bounds.size.width-40, height: 170) )
-//        imgHotel.backgroundColor = UIColor.green
-//        imgHotel.image = UIImage(named: "HotelCover.jpg")
-       
-        var imageUrlString = dict["resturantImage"]as! String   //"http://192.168.1.164:8080/Restuarant_Images/RestImage.jpg"
-        imageUrlString = "http://192.168.1.164:8080" + imageUrlString
+        var imageUrlString = dict["resturantImage"]as! String   //"http://192.168.1.5:8080/Restuarant_Images/RestImage.jpg"
+        imageUrlString = "http://192.168.1.5:8080" + imageUrlString
         let imageUrl:URL = URL(string: imageUrlString)!
         // Start background thread so that image loading does not make app unresponsive
         
