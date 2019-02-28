@@ -18,6 +18,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     
     
+    
+    
     //    let cellReuseIdentifier = "cell"
     private let cellReuseIdentifier: String = "cell"
 
@@ -28,7 +30,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var xOffset:CGFloat = 10
     
     var ddata:String = ""
-    var resturantId:Int = 0
+//    var resturantId:Int = 0
     
     
     override func viewDidLoad() {
@@ -50,6 +52,11 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         lblcartNum.layer.cornerRadius = lblcartNum.frame.width/2
         lblcartNum.layer.masksToBounds = true
         
+        dictTest["prize"] = []
+        dictTest["listNo"] = []
+        dictTest["quantity"] = []
+        dictTest["menuList"] = []
+        
         
         if countofCart == 0{
             lblcartNum.isHidden = true
@@ -59,7 +66,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
          self.navigationController?.isNavigationBarHidden = false
         
-        let urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1001"
+//        let urlMenuCatagory = GVBaseURL + "restaurantmenu/selectbyid/\(resturantId)/\(catagoryId)"
+        let urllink = GVBaseURL+"restaurantmenu/selectbyid/\(resturantId)/1001"
         Alamofire.request(urllink).responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
                 let swiftyJsonVar = JSON(responseData.result.value!)
@@ -106,41 +114,45 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @objc func btnTouch(sender:UIButton){
         var urllink = ""
+
+        catagoryId = sender.tag + 1 + 1000
         if sender.tag == 0{
             arrRes.removeAll()
-            print("button 0 press")
-             urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1001"
-            
-            
+//            catagoryId = 1001
+
         }else if sender.tag == 1{
-            print("button 1 press")
             arrRes.removeAll()
-            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1002"
+//            catagoryId = 1002
+//            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1002"
         }else if sender.tag == 2{
-            print("button 1 press")
             arrRes.removeAll()
-            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1003"
+//            catagoryId = 1003
+//            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1003"
         }else if sender.tag == 3{
             arrRes.removeAll()
-            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1004"
+//            catagoryId = 1004
+//            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1004"
         }else if sender.tag == 4{
-            print("button 1 press")
             arrRes.removeAll()
-            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1005"
+//            catagoryId = 1005
+//            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1005"
         }else if sender.tag == 5{
-            print("button 1 press")
             arrRes.removeAll()
-            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1006"
+//            catagoryId = 1006
+//            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1006"
         }else if sender.tag == 6{
             arrRes.removeAll()
-            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1007"
+//            catagoryId = 1007
+//            urllink = "http://192.168.1.5:8080/api/restaurantmenu/selectbyid/\(resturantId)/1007"
         }
         else if sender.tag == 7{
             self.dismiss(animated: true, completion: nil)
         }
         
-        
-                Alamofire.request(urllink).responseJSON { (responseData) -> Void in
+        let urlMenuCatagory = GVBaseURL + "restaurantmenu/selectbyid/\(resturantId)/\(catagoryId)"
+        print("\(catagoryId)")
+        print("url is \(urlMenuCatagory)")
+                Alamofire.request(urlMenuCatagory).responseJSON { (responseData) -> Void in
                     if((responseData.result.value) != nil) {
                         let swiftyJsonVar = JSON(responseData.result.value!)
                         print(swiftyJsonVar)
@@ -173,7 +185,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let imgMenus = UIImageView(frame: CGRect(x: 20, y: 0, width: UIScreen.main.bounds.size.width-40, height: 110) )
                 var imageUrlString = dict["menuImage"]as! String
-                imageUrlString = "http://192.168.1.5:8080" + imageUrlString
+                imageUrlString = GVImageBaseURL + imageUrlString
                  let imageUrl:URL = URL(string: imageUrlString)!
         
                 // Start background thread so that image loading does not make app unresponsive
@@ -223,6 +235,55 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         lblcartNum.isHidden = false
         countofCart = countofCart + 1
         lblcartNum.text = "\(countofCart)"
+        
+        let dict = arrRes[sender.tag]
+       
+        let listNo = dict["listNo"]
+        let prize = dict["prize"]!
+        let menuList = dict["menuList"]!
+        
+       print("data is \(dict)")
+        
+//        let data: [String: Any] = [
+//            "listNo": listNo as Any,
+//            "prize": prize as Any,
+//            "quantity": 1
+//        ]
+        
+    
+//        arrCardItem.updateValue(listNo!, forKey: "listNo")
+        
+        if var arr = dictTest["listNo"] {
+            arr.append(listNo as! Int)
+            dictTest["listNo"] = arr
+        } else {
+            print("first")
+            dictTest["listNo"] = listNo as? [Int]
+        }
+        
+        if var arr = dictTest["prize"] {
+            arr.append(prize as Any)
+            dictTest["prize"] = arr
+        } else {
+            dictTest["prize"] = (prize as! [Any])
+        }
+        
+        if var arr = dictTest["quantity"] {
+            arr.append(1)
+            dictTest["quantity"] = arr
+        } else {
+            dictTest["quantity"] = ([1] as [Int])
+        }
+        
+        if var arr = dictTest["menuList"] {
+            arr.append(menuList)
+            dictTest["menuList"] = arr
+        } else {
+            print("hey/n/n/t")
+            dictTest["menuList"] = (menuList) as? [Any]
+        }
+        
+        print("all data is \(dictTest)")
         
     }
     

@@ -33,7 +33,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         serchBarview.delegate = self
         
-        Alamofire.request("http://192.168.1.5:8080/api/restaurant/list").responseJSON { (responseData) -> Void in
+        //"http://192.168.1.5:8080/api/restaurant/list"
+        Alamofire.request(apirestaurantList ).responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
                 let swiftyJsonVar = JSON(responseData.result.value!)
                 print(swiftyJsonVar)
@@ -63,8 +64,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var dict = arrRes[indexPath.row]
         
         let imgHotel = UIImageView(frame: CGRect(x: 20, y: 5, width: UIScreen.main.bounds.size.width-40, height: 170) )
-        var imageUrlString = dict["resturantImage"]as! String   //"http://192.168.1.5:8080/Restuarant_Images/RestImage.jpg"
-        imageUrlString = "http://192.168.1.5:8080" + imageUrlString
+        var imageUrlString = dict["resturantImage"]as! String
+        imageUrlString =  GVImageBaseURL + imageUrlString
         let imageUrl:URL = URL(string: imageUrlString)!
         // Start background thread so that image loading does not make app unresponsive
         
@@ -114,7 +115,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        tblView.backgroundColor = UIColor.clear
         let displayVC : MenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
         displayVC.ddata = "Next level blog photo booth, tousled authentic tote bag kogi"
-        displayVC.resturantId = dict["resturantId"] as! Int
+        resturantId = dict["resturantId"] as! Int
         self.present(displayVC, animated: true, completion: nil)
     }
     
