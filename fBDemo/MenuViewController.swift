@@ -14,7 +14,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
    
     var arrRes = [[String:AnyObject]]()
     var arrCatagory:Array<Any> = []
-    var countofCart = 0
+//    var countofCart = 0
     
     
     
@@ -52,16 +52,17 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         lblcartNum.layer.cornerRadius = lblcartNum.frame.width/2
         lblcartNum.layer.masksToBounds = true
         
-        dictTest["prize"] = []
-        dictTest["listNo"] = []
-        dictTest["quantity"] = []
-        dictTest["menuList"] = []
+//        dictTest["price"] = []
+//        dictTest["listNo"] = []
+//        dictTest["quantity"] = []
+//        dictTest["menuList"] = []
         
         
         if countofCart == 0{
             lblcartNum.isHidden = true
         }else{
             lblcartNum.isHidden = false
+            lblcartNum.text = "\(countofCart)"
         }
         
          self.navigationController?.isNavigationBarHidden = false
@@ -231,59 +232,162 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     @objc func btnAddTocart(sender:UIButton){
+        
+//        if dictTest == nil || dictTest
         print("\(sender.tag)")
         lblcartNum.isHidden = false
-        countofCart = countofCart + 1
-        lblcartNum.text = "\(countofCart)"
+//        countofCart = countofCart + 1
+//        lblcartNum.text = "\(countofCart)"
         
-        let dict = arrRes[sender.tag]
+        var dict = arrRes[sender.tag]
        
         let listNo = dict["listNo"]
-        let prize = dict["prize"]!
+        let price = dict["price"]!
         let menuList = dict["menuList"]!
+        let restID = dict["resturantId"]
         
        print("data is \(dict)")
         
+        dict.removeValue(forKey: "menuImage")
+        dict["quantity"] = 1 as AnyObject
+        arrCardItem.append(dict)
+        
+//        print("arrCatagory data is \(arrCardItem)")
+        
 //        let data: [String: Any] = [
 //            "listNo": listNo as Any,
-//            "prize": prize as Any,
+//            "price": price as Any,
 //            "quantity": 1
 //        ]
         
     
 //        arrCardItem.updateValue(listNo!, forKey: "listNo")
         
-        if var arr = dictTest["listNo"] {
-            arr.append(listNo as! Int)
-            dictTest["listNo"] = arr
-        } else {
-            print("first")
-            dictTest["listNo"] = listNo as? [Int]
+       
+        if resturantIdTest == 0 || resturantIdTest == resturantId {
+            resturantIdTest = resturantId
+            
+            
+            if var arr = dictTest["restID"] {
+                arr.append(restID as! Int)
+                dictTest["restID"] = arr
+            } else {
+                print("first")
+                dictTest["restID"] = restID as? [Int]
+            }
+            
+            if var arr = dictTest["listNo"] {
+                arr.append(listNo as! Int)
+                dictTest["listNo"] = arr
+            } else {
+                print("first")
+                dictTest["listNo"] = listNo as? [Int]
+            }
+            
+            if var arr = dictTest["price"] {
+                arr.append(price as Any)
+                dictTest["price"] = arr
+            } else {
+                dictTest["price"] = (price as! [Any])
+            }
+            
+            if var arr = dictTest["quantity"] {
+                arr.append(1)
+                dictTest["quantity"] = arr
+            } else {
+                dictTest["quantity"] = ([1] as [Int])
+            }
+            
+            if var arr = dictTest["menuList"] {
+                arr.append(menuList)
+                dictTest["menuList"] = arr
+            } else {
+                print("hey/n/n/t")
+                dictTest["menuList"] = (menuList) as? [Any]
+            }
+            countofCart = countofCart + 1
+            lblcartNum.text = "\(countofCart)"
+            
+        }else{
+            print("not allow")
+            
+            // Create the alert controller
+            let alertControll = UIAlertController(title: "You can only order items from one menu at a ime", message: "Clear your basket if you'd still like to order this item", preferredStyle: .alert)
+            // Create the actions
+            let clearAndAdd = UIAlertAction(title: "CLEAR BASKET AND ADD", style: UIAlertAction.Style.default) {
+                UIAlertAction in
+                NSLog("clearAndAdd Pressed")
+                countofCart =  1
+                self.lblcartNum.text = "\(countofCart)"
+                
+                dictTest.removeAll()
+                        dictTest["price"] = []
+                        dictTest["listNo"] = []
+                        dictTest["quantity"] = []
+                        dictTest["menuList"] = []
+                
+                resturantIdTest = resturantId
+                if var arr = dictTest["restID"] {
+                    arr.append(restID as! Int)
+                    dictTest["restID"] = arr
+                } else {
+                    print("first")
+                    dictTest["restID"] = restID as? [Int]
+                }
+                
+                if var arr = dictTest["listNo"] {
+                    arr.append(listNo as! Int)
+                    dictTest["listNo"] = arr
+                } else {
+                    print("first")
+                    dictTest["listNo"] = listNo as? [Int]
+                }
+                
+                if var arr = dictTest["price"] {
+                    arr.append(price as Any)
+                    dictTest["price"] = arr
+                } else {
+                    dictTest["price"] = (price as! [Any])
+                }
+                
+                if var arr = dictTest["quantity"] {
+                    arr.append(1)
+                    dictTest["quantity"] = arr
+                } else {
+                    dictTest["quantity"] = ([1] as [Int])
+                }
+                
+                if var arr = dictTest["menuList"] {
+                    arr.append(menuList)
+                    dictTest["menuList"] = arr
+                } else {
+                    print("hey/n/n/t")
+                    dictTest["menuList"] = (menuList) as? [Any]
+                }
+                
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
+                UIAlertAction in
+                NSLog("Cancel Pressed")
+            }
+            
+            //add action
+            alertControll.addAction(clearAndAdd)
+            alertControll.addAction(cancelAction)
+            
+            //present controll
+            self.present(alertControll, animated: true, completion: nil)
+            
         }
         
-        if var arr = dictTest["prize"] {
-            arr.append(prize as Any)
-            dictTest["prize"] = arr
-        } else {
-            dictTest["prize"] = (prize as! [Any])
-        }
         
-        if var arr = dictTest["quantity"] {
-            arr.append(1)
-            dictTest["quantity"] = arr
-        } else {
-            dictTest["quantity"] = ([1] as [Int])
-        }
-        
-        if var arr = dictTest["menuList"] {
-            arr.append(menuList)
-            dictTest["menuList"] = arr
-        } else {
-            print("hey/n/n/t")
-            dictTest["menuList"] = (menuList) as? [Any]
-        }
+       
         
         print("all data is \(dictTest)")
+        
+    }
+    
+    func addData(){
         
     }
     

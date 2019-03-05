@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -14,7 +15,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     let arrMenulist = dictTest["menuList"]
     let arrquantity = dictTest["quantity"]
-    let arrprize = dictTest["prize"]
+    let arrprice = dictTest["price"]
     let arrlistNo = dictTest["listNo"]
     
     var total = 0
@@ -36,11 +37,12 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         print("arrquantity is \(String(describing: arrquantity))")
         print("menuList is \(String(describing: arrMenulist))")
-        print("arrprize is \(String(describing: arrprize))")
+        print("arrprice is \(String(describing: arrprice))")
         print("arrlistNo is \(String(describing: arrlistNo)) \(String(describing: arrlistNo?.count))")
         
     }
     
+    //MARK: TableViewData source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        return arrlistNo?.count ?? 0
         return (dictTest["listNo"]?.count)! + 1
@@ -54,11 +56,16 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         if indexPath.row == (dictTest["listNo"]?.count)! {
             let lblAmount = UILabel(frame: CGRect(x: 5, y: 0, width: UIScreen.main.bounds.width/2, height: 30))
-            lblAmount.text = "Total amount \(total)"
-            lblAmount.numberOfLines = 1
-            lblAmount.minimumScaleFactor = 0.5
+            lblAmount.text = "Total amount"
+            lblAmount.font = UIFont.boldSystemFont(ofSize: 20.0)
             lblAmount.adjustsFontSizeToFitWidth = true
             cell.addSubview(lblAmount)
+            
+            let lblTotal = UILabel(frame: CGRect(x: UIScreen.main.bounds.width-50, y: 0, width: 50, height: 30))
+            lblTotal.text = "$\(total)"
+            lblTotal.font = UIFont.boldSystemFont(ofSize: 20.0)
+            lblTotal.adjustsFontSizeToFitWidth = true
+            cell.addSubview(lblTotal)
         }else{
                 let lblName = UILabel(frame: CGRect(x: 5, y: 0, width: UIScreen.main.bounds.width/2, height: 30))
                 lblName.text = arrMenulist?[indexPath.row] as? String
@@ -92,7 +99,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 cell.addSubview(btnadd)
         
                 let lblPrice = UILabel(frame: CGRect(x: UIScreen.main.bounds.width-50, y: 10, width: 50, height: 20))
-                lblPrice.text = dictTest["prize"]![indexPath.row] as! String
+                lblPrice.text = dictTest["price"]![indexPath.row] as! String
                 cell.addSubview(lblPrice)
         
         }
@@ -101,6 +108,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
+    //MARK: btn Add and Subtract logic
     @objc func btnSubstractPress(sender:UIButton){
         let tmpvalue =  dictTest["quantity"]![sender.tag] as! Int
         
@@ -108,18 +116,20 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if tmpvalue == 1{
 
              dictTest["quantity"]?.remove(at: sender.tag)
-            dictTest["prize"]?.remove(at: sender.tag)
+            dictTest["price"]?.remove(at: sender.tag)
             dictTest["menuList"]?.remove(at: sender.tag)
             dictTest["listNo"]?.remove(at: sender.tag)
             print(dictTest["quantity"]?.count)
             print("final data is \(dictTest)")
+            
+            countofCart = countofCart - 1
              tblCart.reloadData()
         }
         if tmpvalue>1{
         
             dictTest["quantity"]![sender.tag] = tmpvalue - 1
         
-            let tmpprice =  dictTest["prize"]![sender.tag] as! String
+            let tmpprice =  dictTest["price"]![sender.tag] as! String
             let editedText = tmpprice.replacingOccurrences(of: "$", with: "")
             let temp2 = Int(editedText)
         
@@ -131,7 +141,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let strtmp = "$\(tmp4)"
             print(strtmp)
         
-            dictTest["prize"]![sender.tag] = strtmp
+            dictTest["price"]![sender.tag] = strtmp
         
             tblCart.reloadData()
         }
@@ -145,7 +155,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let tmpvalue =  dictTest["quantity"]![sender.tag] as! Int
         dictTest["quantity"]![sender.tag] = tmpvalue + 1
  
-        let tmpprice =  dictTest["prize"]![sender.tag] as! String
+        let tmpprice =  dictTest["price"]![sender.tag] as! String
         let editedText = tmpprice.replacingOccurrences(of: "$", with: "")
         let temp2 = Int(editedText)
         
@@ -157,24 +167,41 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let strtmp = "$\(tmp4)"
         print(strtmp)
         
-        dictTest["prize"]![sender.tag] = strtmp
+        dictTest["price"]![sender.tag] = strtmp
         
         tblCart.reloadData()
         
         amountCalculate()
     }
     
+    //MARK: Total price calculation
+    
     func amountCalculate() {
-//        dictTest["prize"]
-        for arr in dictTest["prize"] ?? [0] {
+//        dictTest["price"]
+        for arr in dictTest["price"] ?? [0] {
             let tmpprice =  arr as! String
             var tmp = tmpprice.replacingOccurrences(of: "$", with: "")
             let temp2 = Int(tmp)
             total = total + temp2!
+            
+            
         }
     }
     
-
+    @IBAction func btnBackPress(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //MARK: Pay Later btn and update to server
+    @IBAction func btnPayLaterPes(_ sender: Any) {
+        let url = "http://182.73.184.62:443/api/order/addOrder" // This will be your link
+        let parameters: Parameters = ["restaurantId": resturantId, "listNo": dictTest["listNo"]!, "quantity": dictTest["quantity"]!, "totalPrice": "$\(total)", "paymentStatus": "false"]      //This will be your parameter
+        print("\(parameters)")
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+            print(response)
+        }
+        
+    }
     /*
     // MARK: - Navigation
 

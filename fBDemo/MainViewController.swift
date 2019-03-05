@@ -23,6 +23,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dictTest["price"] = []
+        dictTest["listNo"] = []
+        dictTest["quantity"] = []
+        dictTest["menuList"] = []
+        dictTest["restID"] = []
 
         // Do any additional setup after loading the view.
         tblView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")

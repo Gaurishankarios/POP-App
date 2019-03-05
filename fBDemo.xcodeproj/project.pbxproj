@@ -26,6 +26,7 @@
 		A54E382A221EBE440029D9DE /* HotelCover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A54E3829221EBE430029D9DE /* HotelCover.jpg */; };
 		A585F5F722240700003376ED /* add-to-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = A585F5F622240700003376ED /* add-to-cart.png */; };
 		A585F5F92224218A003376ED /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585F5F82224218A003376ED /* MenuViewController.swift */; };
+		A5913A73222D4ABD00DB98F5 /* ShowQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5913A72222D4ABD00DB98F5 /* ShowQRViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		A54E3829221EBE430029D9DE /* HotelCover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HotelCover.jpg; sourceTree = "<group>"; };
 		A585F5F622240700003376ED /* add-to-cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-to-cart.png"; sourceTree = "<group>"; };
 		A585F5F82224218A003376ED /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		A5913A72222D4ABD00DB98F5 /* ShowQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQRViewController.swift; sourceTree = "<group>"; };
 		FD186035CB5B1EF7E93A0CB2 /* Pods-fBDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fBDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fBDemo/Pods-fBDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,6 +111,7 @@
 				A5437205221BFA4200532472 /* MainViewController.swift */,
 				A585F5F82224218A003376ED /* MenuViewController.swift */,
 				A51C77A822282B4E001DFD90 /* CartViewController.swift */,
+				A5913A72222D4ABD00DB98F5 /* ShowQRViewController.swift */,
 				A51C77A02227C683001DFD90 /* Constant.swift */,
 				A53E7E94221AB5C900D6000E /* Main.storyboard */,
 				A585F5FA222421AF003376ED /* supportdata */,
@@ -304,6 +307,7 @@
 				A51C77A12227C683001DFD90 /* Constant.swift in Sources */,
 				A53E7E91221AB5C900D6000E /* AppDelegate.swift in Sources */,
 				A51C77A922282B4E001DFD90 /* CartViewController.swift in Sources */,
+				A5913A73222D4ABD00DB98F5 /* ShowQRViewController.swift in Sources */,
 				A585F5F92224218A003376ED /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
