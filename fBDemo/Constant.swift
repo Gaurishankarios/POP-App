@@ -9,8 +9,8 @@
 import Foundation
 
 //"http://182.73.184.62:443/api/"
-var GVBaseURL = "http://182.73.184.62:443/api/"
-var GVImageBaseURL = "http://182.73.184.62:443"
+var GVBaseURL = "http://182.73.184.62:443/api/"        //http://182.73.184.62:443/api/ //http://192.168.1.164:8080
+var GVImageBaseURL = "http://182.73.184.62:443"    //http://182.73.184.62:443  //http://192.168.1.164:8080
 
 var resturantId = 0
 var catagoryId = 0
@@ -25,4 +25,6 @@ var dictTest = Dictionary<String, Array<Any>>()
 
 let apirestaurantList = GVBaseURL + "restaurant/list"
 let urlCatagorylink = "http://182.73.184.62:443/api/restaurantmenu/selectbyid/\(resturantId)/\(catagoryId)"
+//http://182.73.184.62:443/api/restaurantmenu/selectbyid/\(resturantId)/\(catagoryId)
+//http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/\(catagoryId)
 

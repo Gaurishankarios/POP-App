@@ -25,9 +25,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         
         dictTest["price"] = []
-        dictTest["listNo"] = []
+        dictTest["menuId"] = []
         dictTest["quantity"] = []
-        dictTest["menuList"] = []
+        dictTest["menuItemName"] = []
         dictTest["restID"] = []
 
         // Do any additional setup after loading the view.
@@ -70,7 +70,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var dict = arrRes[indexPath.row]
         
         let imgHotel = UIImageView(frame: CGRect(x: 20, y: 5, width: UIScreen.main.bounds.size.width-40, height: 170) )
-        var imageUrlString = dict["resturantImage"]as! String
+        var imageUrlString = dict["restaurantImage"]as! String
         imageUrlString =  GVImageBaseURL + imageUrlString
         let imageUrl:URL = URL(string: imageUrlString)!
         // Start background thread so that image loading does not make app unresponsive
@@ -97,13 +97,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let lblHotelName = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width-40, height: 30))
         lblHotelName.backgroundColor = UIColor.white
-        lblHotelName.text = dict["resturantName"] as? String
+        lblHotelName.text = dict["restaurantName"] as? String
         lblHotelName.textColor = UIColor.gray
         lblHotelName.font = lblHotelName.font.withSize(20)
         tmpView.addSubview(lblHotelName)
         
         let lblHoteldesc = UILabel(frame: CGRect(x: 0, y: 30, width: UIScreen.main.bounds.size.width-40, height: 20))
-        lblHoteldesc.text = dict["resturantCuisine"] as? String
+        lblHoteldesc.text = dict["restaurantCuisine"] as? String
         lblHoteldesc.textColor = UIColor.gray
         lblHoteldesc.font = lblHotelName.font.withSize(12)
         tmpView.addSubview(lblHoteldesc)
@@ -121,7 +121,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        tblView.backgroundColor = UIColor.clear
         let displayVC : MenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
         displayVC.ddata = "Next level blog photo booth, tousled authentic tote bag kogi"
-        resturantId = dict["resturantId"] as! Int
+        resturantId = dict["restaurantId"] as! Int
         self.present(displayVC, animated: true, completion: nil)
     }
     

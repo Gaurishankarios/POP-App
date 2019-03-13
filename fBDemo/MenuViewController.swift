@@ -87,6 +87,17 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if countofCart == 0{
+            lblcartNum.isHidden = true
+        }else{
+            lblcartNum.isHidden = false
+            lblcartNum.text = "\(countofCart)"
+        }
+        
+    }
+    
     //MARK: Design of scroll btn
     func UIJscrollBtn(){
         
@@ -211,7 +222,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let lblMenuName = UILabel(frame: CGRect(x: 0, y: imgMenus.frame.size.height-40, width: UIScreen.main.bounds.size.width-40, height: 30))
         lblMenuName.backgroundColor = UIColor.init(red: 25/255, green: 27/255, blue: 11/255, alpha: 0.5)
-        lblMenuName.text = dict["menuList"] as? String
+        lblMenuName.text = dict["menuItemName"] as? String
         lblMenuName.textColor = UIColor.white
         imgMenus.addSubview(lblMenuName)
         
@@ -241,9 +252,9 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         var dict = arrRes[sender.tag]
        
-        let listNo = dict["listNo"]
+        let listNo = dict["menuId"]
         let price = dict["price"]!
-        let menuList = dict["menuList"]!
+        let menuList = dict["menuItemName"]!
         let restID = dict["resturantId"]
         
        print("data is \(dict)")
@@ -261,7 +272,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        ]
         
     
-//        arrCardItem.updateValue(listNo!, forKey: "listNo")
+//        arrCardItem.updateValue(listNo!, forKey: "menuId")
         
        
         if resturantIdTest == 0 || resturantIdTest == resturantId {
@@ -276,12 +287,12 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 dictTest["restID"] = restID as? [Int]
             }
             
-            if var arr = dictTest["listNo"] {
+            if var arr = dictTest["menuId"] {
                 arr.append(listNo as! Int)
-                dictTest["listNo"] = arr
+                dictTest["menuId"] = arr
             } else {
                 print("first")
-                dictTest["listNo"] = listNo as? [Int]
+                dictTest["menuId"] = listNo as? [Int]
             }
             
             if var arr = dictTest["price"] {
@@ -298,12 +309,12 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 dictTest["quantity"] = ([1] as [Int])
             }
             
-            if var arr = dictTest["menuList"] {
+            if var arr = dictTest["menuItemName"] {
                 arr.append(menuList)
-                dictTest["menuList"] = arr
+                dictTest["menuItemName"] = arr
             } else {
                 print("hey/n/n/t")
-                dictTest["menuList"] = (menuList) as? [Any]
+                dictTest["menuItemName"] = (menuList) as? [Any]
             }
             countofCart = countofCart + 1
             lblcartNum.text = "\(countofCart)"
@@ -322,9 +333,9 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 dictTest.removeAll()
                         dictTest["price"] = []
-                        dictTest["listNo"] = []
+                        dictTest["menuId"] = []
                         dictTest["quantity"] = []
-                        dictTest["menuList"] = []
+                        dictTest["menuItemName"] = []
                 
                 resturantIdTest = resturantId
                 if var arr = dictTest["restID"] {
@@ -335,12 +346,12 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     dictTest["restID"] = restID as? [Int]
                 }
                 
-                if var arr = dictTest["listNo"] {
+                if var arr = dictTest["menuId"] {
                     arr.append(listNo as! Int)
-                    dictTest["listNo"] = arr
+                    dictTest["menuId"] = arr
                 } else {
                     print("first")
-                    dictTest["listNo"] = listNo as? [Int]
+                    dictTest["menuId"] = listNo as? [Int]
                 }
                 
                 if var arr = dictTest["price"] {
@@ -357,12 +368,12 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     dictTest["quantity"] = ([1] as [Int])
                 }
                 
-                if var arr = dictTest["menuList"] {
+                if var arr = dictTest["menuItemName"] {
                     arr.append(menuList)
-                    dictTest["menuList"] = arr
+                    dictTest["menuItemName"] = arr
                 } else {
                     print("hey/n/n/t")
-                    dictTest["menuList"] = (menuList) as? [Any]
+                    dictTest["menuItemName"] = (menuList) as? [Any]
                 }
                 
             }
