@@ -16,8 +16,9 @@ class ShowQRViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        self.navigationController?.isNavigationBarHidden = false
         
-        let image = generateQRCode(from: "your data is \(dictTest)")
+        let image = generateQRCode(from: orderIDis)
         imgQRCode.image = image
     }
     
@@ -35,6 +36,10 @@ class ShowQRViewController: UIViewController {
         }
         
         return nil
+    }
+    
+    @IBAction func btnBackPress(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 
     /*

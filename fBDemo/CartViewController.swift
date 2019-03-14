@@ -195,14 +195,31 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //MARK: Pay Later btn and update to server
     @IBAction func btnPayLaterPes(_ sender: Any) {
+        
         let url = "http://182.73.184.62:443/api/order/addOrder" // This will be your link
-        let parameters: Parameters = ["restID": resturantId, "menuId": dictTest["menuId"]!, "quantity": dictTest["quantity"]!, "totalPrice": "$\(total)", "paymentStatus": "false"]      //This will be your parameter
+        let parameters: Parameters = ["userId": 121, "restaurantId": resturantId, "menuId": dictTest["menuId"]!, "quantity": dictTest["quantity"]!, "totalPrice": "$\(total)", "paymentStatus": "false", "orderStartTime": "asassa" ]      //This will be your parameter
         print("\(parameters)")
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
             print(response)
+            switch response.result {
+            case .success:
+                print("responce is \(response.result)")
+                // DO stuff
+                orderIDis = response.value!
+                
+                let displayVC : ShowQRViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShowQRViewController") as! ShowQRViewController
+                self.present(displayVC, animated: true, completion: nil)
+                
+                
+            case .failure(let error):
+                print(error)
+            }
         }
         
+        
     }
+    
+
     /*
     // MARK: - Navigation
 

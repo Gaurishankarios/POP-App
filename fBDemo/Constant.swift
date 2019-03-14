@@ -20,6 +20,7 @@ var resturantIdTest = 0
 //var arrCardItem = [String:AnyObject]() //Array of dictionary
 var arrCardItem:Array<Any> = []
 var dictTest = Dictionary<String, Array<Any>>()
+var orderIDis = ""
 
 
 
