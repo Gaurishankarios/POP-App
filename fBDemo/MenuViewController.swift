@@ -52,6 +52,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         lblcartNum.layer.cornerRadius = lblcartNum.frame.width/2
         lblcartNum.layer.masksToBounds = true
         
+        
 //        dictTest["price"] = []
 //        dictTest["listNo"] = []
 //        dictTest["quantity"] = []

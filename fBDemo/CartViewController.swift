@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
@@ -74,10 +75,10 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 lblName.adjustsFontSizeToFitWidth = true
                 cell.addSubview(lblName)
         
-                let btnsubtract = UIButton(frame: CGRect(x: lblName.frame.origin.x+lblName.frame.size.width+5, y: 10, width: 20, height: 20))
+                let btnsubtract = UIButton(frame: CGRect(x: lblName.frame.origin.x+lblName.frame.size.width+5, y: 5, width: 30, height: 30))
                 btnsubtract.setTitle("-", for: UIControl.State.normal)
                 btnsubtract.backgroundColor = UIColor.red
-                btnsubtract.layer.cornerRadius = 10
+                btnsubtract.layer.cornerRadius = 15
                 btnsubtract.tag = indexPath.row
                 btnsubtract.addTarget(self, action: #selector(btnSubstractPress), for: UIControl.Event.touchUpInside)
                 cell.addSubview(btnsubtract)
@@ -90,10 +91,10 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 lblNumber.textAlignment = .center
                 cell.addSubview(lblNumber)
         
-                let btnadd = UIButton(frame: CGRect(x: lblNumber.frame.origin.x+lblNumber.frame.size.width, y: 10, width: 20, height: 20))
+                let btnadd = UIButton(frame: CGRect(x: lblNumber.frame.origin.x+lblNumber.frame.size.width, y: 5, width: 30, height: 30))
                 btnadd.setTitle("+", for: UIControl.State.normal)
                 btnadd.backgroundColor = UIColor.red
-                btnadd.layer.cornerRadius = 10
+                btnadd.layer.cornerRadius = 15
                 btnadd.tag = indexPath.row
                 btnadd.addTarget(self, action: #selector(btnAddPress), for: UIControl.Event.touchUpInside)
                 cell.addSubview(btnadd)
@@ -199,21 +200,35 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let url = "http://182.73.184.62:443/api/order/addOrder" // This will be your link
         let parameters: Parameters = ["userId": 121, "restaurantId": resturantId, "menuId": dictTest["menuId"]!, "quantity": dictTest["quantity"]!, "totalPrice": "$\(total)", "paymentStatus": "false", "orderStartTime": "asassa" ]      //This will be your parameter
         print("\(parameters)")
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseString { response in
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
             print(response)
-            switch response.result {
-            case .success:
-                print("responce is \(response.result)")
-                // DO stuff
-                orderIDis = response.value!
+            
+            let swiftyJsonVar = JSON(response.result.value!)
+            
+            if let name = swiftyJsonVar["orderId"].string {
+                // get name
+                orderIDis = name
                 
+                print("\(name)")
                 let displayVC : ShowQRViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShowQRViewController") as! ShowQRViewController
                 self.present(displayVC, animated: true, completion: nil)
-                
-                
-            case .failure(let error):
-                print(error)
             }
+//            orderIDis = tmpatring
+//            print("tmpstring is \(tmpatring)")
+            
+//            switch response.result {
+//            case .success:
+//                print("responce is \(response.result)")
+//                // DO stuff
+//                orderIDis = response.value! as! String
+//
+//                let displayVC : ShowQRViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShowQRViewController") as! ShowQRViewController
+//                self.present(displayVC, animated: true, completion: nil)
+//
+//
+//            case .failure(let error):
+//                print(error)
+//            }
         }
         
         

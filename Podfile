@@ -16,6 +16,8 @@ pod 'Firebase/Auth'
 pod 'GoogleSignIn'
 pod 'Firebase/Core'
 
+pod 'Firebase/Messaging'
+
 pod 'Alamofire'
 pod 'SwiftyJSON'
 

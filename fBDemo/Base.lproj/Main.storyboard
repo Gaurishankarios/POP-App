@@ -62,7 +62,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png" translatesAutoresizingMaskIntoConstraints="NO" id="ESY-M1-jj5">
-                                <rect key="frame" x="266" y="46" width="28" height="28"/>
+                                <rect key="frame" x="264" y="50" width="15" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search Restaurant" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DgH-FR-QYf">
@@ -74,7 +74,7 @@
                                 </connections>
                             </searchBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="iconmonstr-location-pin-thin.png" translatesAutoresizingMaskIntoConstraints="NO" id="tH9-jw-gQs">
-                                <rect key="frame" x="83" y="46" width="28" height="28"/>
+                                <rect key="frame" x="81" y="50" width="28" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -108,7 +108,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" fixedFrame="YES" placeholder="Search Restaurant" showsSearchResultsButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xbH-b2-AD8">
-                                <rect key="frame" x="42" y="32" width="277" height="56"/>
+                                <rect key="frame" x="42" y="32" width="275" height="56"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
@@ -130,7 +130,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7kw-jV-Yyh">
-                                <rect key="frame" x="325" y="50" width="34" height="27"/>
+                                <rect key="frame" x="322" y="37" width="37" height="51"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="add-to-cart.png"/>
                                 <connections>
@@ -145,8 +145,8 @@
                                     <action selector="btnBackPress:" destination="LnW-nZ-uHS" eventType="touchUpInside" id="BFO-We-0XJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-SY-l0x">
-                                <rect key="frame" x="336" y="43" width="23" height="22"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-SY-l0x">
+                                <rect key="frame" x="336" y="32" width="23" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
