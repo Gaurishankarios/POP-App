@@ -21,6 +21,10 @@
 		A53E7E9B221AB5D800D6000E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A53E7E99221AB5D800D6000E /* LaunchScreen.storyboard */; };
 		A5437204221BD81F00532472 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A5437203221BD81F00532472 /* GoogleService-Info.plist */; };
 		A5437206221BFA4200532472 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5437205221BFA4200532472 /* MainViewController.swift */; };
+		A549C540223FF08900BAA6FC /* home-4.png in Resources */ = {isa = PBXBuildFile; fileRef = A549C53F223FF08800BAA6FC /* home-4.png */; };
+		A549C542223FF12300BAA6FC /* shopping-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = A549C541223FF12100BAA6FC /* shopping-cart.png */; };
+		A549C544223FF26600BAA6FC /* bill.png in Resources */ = {isa = PBXBuildFile; fileRef = A549C543223FF20200BAA6FC /* bill.png */; };
+		A549C546223FF35300BAA6FC /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = A549C545223FF35200BAA6FC /* avatar.png */; };
 		A54E3826221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png in Resources */ = {isa = PBXBuildFile; fileRef = A54E3825221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png */; };
 		A54E3828221EB4A80029D9DE /* arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png in Resources */ = {isa = PBXBuildFile; fileRef = A54E3827221EB4A80029D9DE /* arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png */; };
 		A54E382A221EBE440029D9DE /* HotelCover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A54E3829221EBE430029D9DE /* HotelCover.jpg */; };
@@ -50,6 +54,10 @@
 		A53E7E9C221AB5D800D6000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5437203221BD81F00532472 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A5437205221BFA4200532472 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		A549C53F223FF08800BAA6FC /* home-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-4.png"; sourceTree = "<group>"; };
+		A549C541223FF12100BAA6FC /* shopping-cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shopping-cart.png"; sourceTree = "<group>"; };
+		A549C543223FF20200BAA6FC /* bill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bill.png; sourceTree = "<group>"; };
+		A549C545223FF35200BAA6FC /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 		A54E3825221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconmonstr-location-pin-thin.png"; sourceTree = "<group>"; };
 		A54E3827221EB4A80029D9DE /* arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png"; sourceTree = "<group>"; };
 		A54E3829221EBE430029D9DE /* HotelCover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HotelCover.jpg; sourceTree = "<group>"; };
@@ -134,7 +142,11 @@
 			isa = PBXGroup;
 			children = (
 				A51C77A6222824AE001DFD90 /* callNow.png */,
+				A549C53F223FF08800BAA6FC /* home-4.png */,
+				A549C543223FF20200BAA6FC /* bill.png */,
+				A549C545223FF35200BAA6FC /* avatar.png */,
 				A5605EE7223A946C0044F003 /* inline.png */,
+				A549C541223FF12100BAA6FC /* shopping-cart.png */,
 				A51C77A22228216D001DFD90 /* placeholder.png */,
 				A51C77A4222823E3001DFD90 /* turn-right-sign.png */,
 				A54E3825221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png */,
@@ -214,6 +226,7 @@
 			files = (
 				A53E7E9B221AB5D800D6000E /* LaunchScreen.storyboard in Resources */,
 				A53E7E98221AB5D800D6000E /* Assets.xcassets in Resources */,
+				A549C540223FF08900BAA6FC /* home-4.png in Resources */,
 				A51C77A5222823E4001DFD90 /* turn-right-sign.png in Resources */,
 				A585F5F722240700003376ED /* add-to-cart.png in Resources */,
 				A51C77A32228216D001DFD90 /* placeholder.png in Resources */,
@@ -224,7 +237,10 @@
 				A53E7E96221AB5C900D6000E /* Main.storyboard in Resources */,
 				A54E3826221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png in Resources */,
 				A51C77A7222824AF001DFD90 /* callNow.png in Resources */,
+				A549C546223FF35300BAA6FC /* avatar.png in Resources */,
 				A54E382A221EBE440029D9DE /* HotelCover.jpg in Resources */,
+				A549C544223FF26600BAA6FC /* bill.png in Resources */,
+				A549C542223FF12300BAA6FC /* shopping-cart.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

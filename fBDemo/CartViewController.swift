@@ -10,9 +10,10 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
 
     @IBOutlet weak var tblCart: UITableView!
+    @IBOutlet weak var tabBar: UITabBar!
     
     let arrMenulist = dictTest["menuItemName"]
     let arrquantity = dictTest["quantity"]
@@ -33,6 +34,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tblCart.dataSource = self
         // Do any additional setup after loading the view.
         tblCart.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        
+        tabBar.delegate = self
         
        amountCalculate()
         
@@ -198,7 +201,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBAction func btnPayLaterPes(_ sender: Any) {
         
         let url = "http://182.73.184.62:443/api/order/addOrder" // This will be your link
-        let parameters: Parameters = ["userId": 121, "restaurantId": resturantId, "menuId": dictTest["menuId"]!, "quantity": dictTest["quantity"]!, "totalPrice": "$\(total)", "paymentStatus": "false", "orderStartTime": "asassa" ]      //This will be your parameter
+        let parameters: Parameters = ["userId": userIDofuser, "restaurantId": resturantId, "menuId": dictTest["menuId"]!, "quantity": dictTest["quantity"]!, "totalPrice": "$\(total)", "paymentStatus": "false", "orderStartTime": "asassa" ]      //This will be your parameter
         print("\(parameters)")
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
             print(response)
@@ -213,28 +216,28 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let displayVC : ShowQRViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShowQRViewController") as! ShowQRViewController
                 self.present(displayVC, animated: true, completion: nil)
             }
-//            orderIDis = tmpatring
-//            print("tmpstring is \(tmpatring)")
-            
-//            switch response.result {
-//            case .success:
-//                print("responce is \(response.result)")
-//                // DO stuff
-//                orderIDis = response.value! as! String
-//
-//                let displayVC : ShowQRViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShowQRViewController") as! ShowQRViewController
-//                self.present(displayVC, animated: true, completion: nil)
-//
-//
-//            case .failure(let error):
-//                print(error)
-//            }
+
         }
         
         
     }
     
 
+    
+    //MARK: tab bar delegate
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Selected item \(item.tag)")
+        
+        if item.tag == 0{
+            let displayVC : MainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            self.present(displayVC, animated: true, completion: nil)
+        }else if(item.tag == 2){
+            let displayVC : OrderSummeryViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+            self.present(displayVC, animated: true, completion: nil)
+        }
+        
+        
+    }
     /*
     // MARK: - Navigation
 

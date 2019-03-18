@@ -17,6 +17,9 @@ import Firebase
 import FirebaseInstanceID
 import FirebaseMessaging
 
+import Alamofire
+import SwiftyJSON
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
@@ -56,6 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
 //            rootViewController.pushViewController(profileViewController, animated: true)
 //        }
         
+        let tmpvar = UserDefaults.standard.string(forKey: "userId")
+        let tmp2 = Int(tmpvar!)
+        userIDofuser = tmp2!
+         print("data is \(userIDofuser)")
+        
         if status{
             let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
             
@@ -90,6 +98,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("Firebase registration token: \(fcmToken)")
+        
+        fcmdeviceToken = fcmToken
         
         let dataDict:[String: String] = ["token": fcmToken]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
@@ -147,12 +157,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
             }
             else{
                 
-                let rootViewController = self.window!.rootViewController as! UINavigationController
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-                rootViewController.pushViewController(profileViewController, animated: true)
-                
-                
                 print("Google Authentification Success")
                 
                 let userId = user.userID                  // For client-side use only!
@@ -161,9 +165,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
                 let givenName = user.profile.givenName
                 let familyName = user.profile.familyName
                 let email = user.profile.email
-                print("user detail is \(String(describing: userId)) id token is \(String(describing: idToken)) \n full name is \(String(describing: fullName)) \n given name is \(String(describing: givenName)) \n family name is \(String(describing: familyName))\n email is \(String(describing: email))")
                 
-                UserDefaults.standard.set(true, forKey: "userlogin")
+                let url = "http://182.73.184.62:443/api/login/save" // This will be your link
+                let parameters: Parameters = ["userEmailId": email!, "deviceToken": fcmdeviceToken, "userName": fullName!, "userRole": "user", "loginStatus": "true" ]      //This will be your parameter
+                print("\(parameters)")
+                Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+                    print(response)
+                    
+                    let swiftyJsonVar = JSON(response.result.value!)
+                    print("server data is  \(swiftyJsonVar)")
+                    
+                    if let name = swiftyJsonVar["userId"].string {
+                        
+                        let rootViewController = self.window!.rootViewController as! UINavigationController
+                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                        rootViewController.pushViewController(profileViewController, animated: true)
+                        
+                         UserDefaults.standard.set(true, forKey: "userlogin")
+                        UserDefaults.standard.set(name, forKey: "userId")
+                        
+                        userIDofuser = Int(name)!
+                        
+//                        print("user detail is \(String(describing: userId)) id token is \(String(describing: idToken)) \n full name is \(String(describing: fullName)) \n given name is \(String(describing: givenName)) \n family name is \(String(describing: familyName))\n email is \(String(describing: email))")
+                        
+                       
+                    }
+                }
+                
+                
+               
             }
             // User is signed in
             // ...

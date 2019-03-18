@@ -11,11 +11,13 @@ import Alamofire
 import SwiftyJSON
 
 
-class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
     
     var arrRes = [[String:AnyObject]]()
     private let cellReuseIdentifier: String = "cell"
     var totalpriceorder = ""
+    
+    @IBOutlet weak var tabBar: UITabBar!
     
     @IBOutlet weak var tblorderSummery: UITableView!
     override func viewDidLoad() {
@@ -25,6 +27,8 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
         tblorderSummery.delegate = self
         tblorderSummery.dataSource = self
         tblorderSummery.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        
+        tabBar.delegate = self
         
 //        http://192.168.1.164:8181/api/ordersummary/getorderSummary/1012019.03.12.16.33.47121
          let urllink = GVBaseURL+"ordersummary/getorderSummary/\(orderIDis)"
@@ -95,6 +99,22 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
             
         }
            return cell
+        
+    }
+    
+    
+    //MARK: tab bar delegate
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Selected item \(item.tag)")
+        
+        if item.tag == 0{
+            let displayVC : MainViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            self.present(displayVC, animated: true, completion: nil)
+        }else if(item.tag == 1){
+            let displayVC : CartViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+            self.present(displayVC, animated: true, completion: nil)
+        }
+        
         
     }
     

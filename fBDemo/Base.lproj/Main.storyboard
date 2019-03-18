@@ -45,7 +45,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cTg-jE-gVU">
-                                <rect key="frame" x="0.0" y="136" width="375" height="531"/>
+                                <rect key="frame" x="0.0" y="136" width="375" height="482"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -77,6 +77,17 @@
                                 <rect key="frame" x="81" y="50" width="28" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BKh-W0-Mks">
+                                <rect key="frame" x="1" y="618" width="375" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="Home" image="home-4.png" id="sc1-k9-n4Z"/>
+                                    <tabBarItem tag="1" title="Cart" image="shopping-cart.png" id="2ZN-r8-z3d"/>
+                                    <tabBarItem tag="2" title="Order Summery" image="bill.png" id="gje-HJ-gTi"/>
+                                    <tabBarItem tag="3" title="User" image="avatar.png" id="tkf-TU-CFE"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Olb-eB-ecO"/>
@@ -84,6 +95,7 @@
                     <connections>
                         <outlet property="searchDisplayController" destination="1nJ-my-5mV" id="HTh-d1-HSb"/>
                         <outlet property="serchBarview" destination="DgH-FR-QYf" id="XWg-3K-Vbk"/>
+                        <outlet property="tabBar" destination="BKh-W0-Mks" id="gri-fH-tEb"/>
                         <outlet property="tblView" destination="cTg-jE-gVU" id="bA5-vS-l6I"/>
                     </connections>
                 </viewController>
@@ -258,11 +270,23 @@
                                     <action selector="btnBackPress:" destination="QhK-k4-7b6" eventType="touchUpInside" id="a1O-PM-bMR"/>
                                 </connections>
                             </button>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OHi-or-nVj">
+                                <rect key="frame" x="0.0" y="618" width="375" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="Home" image="home-4.png" id="w62-2r-or5"/>
+                                    <tabBarItem tag="1" title="Cart" image="shopping-cart.png" id="rnC-pf-CfE"/>
+                                    <tabBarItem tag="2" title="Order Summery" image="bill.png" id="MmK-1Z-W3t"/>
+                                    <tabBarItem tag="3" title="User" image="avatar.png" id="iDL-5a-ebo"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="vuY-Tu-PBz"/>
                     </view>
                     <connections>
+                        <outlet property="tabBar" destination="OHi-or-nVj" id="R5h-mw-tV5"/>
                         <outlet property="tblCart" destination="gQx-tf-RCW" id="fi3-mL-dxM"/>
                     </connections>
                 </viewController>
@@ -421,11 +445,23 @@
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </view>
+                            <tabBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gzh-9D-TsD">
+                                <rect key="frame" x="1" y="618" width="375" height="49"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <tabBarItem title="Home" image="home-4.png" id="1yZ-c7-IFJ"/>
+                                    <tabBarItem tag="1" title="Cart" image="shopping-cart.png" id="csj-Xt-o1h"/>
+                                    <tabBarItem tag="2" title="Order Summery" image="bill.png" id="Igt-y4-WFZ"/>
+                                    <tabBarItem tag="3" title="User" image="avatar.png" id="4jN-NI-PHD"/>
+                                </items>
+                            </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="hDP-Wt-p1I"/>
                     </view>
                     <connections>
+                        <outlet property="tabBar" destination="Gzh-9D-TsD" id="Fqq-PO-hf6"/>
                         <outlet property="tblorderSummery" destination="g9W-bs-ZOe" id="d3o-rf-ZvG"/>
                     </connections>
                 </viewController>
@@ -456,11 +492,15 @@
         <image name="HotelCover.jpg" width="1920" height="1080"/>
         <image name="add-to-cart.png" width="64" height="64"/>
         <image name="arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png" width="512" height="512"/>
+        <image name="avatar.png" width="30" height="30"/>
         <image name="back-navigational.png" width="32" height="32"/>
+        <image name="bill.png" width="30" height="30"/>
         <image name="callNow.png" width="89" height="27"/>
+        <image name="home-4.png" width="32" height="32"/>
         <image name="iconmonstr-location-pin-thin.png" width="240" height="240"/>
         <image name="inline.png" width="79" height="62"/>
         <image name="placeholder.png" width="256" height="256"/>
+        <image name="shopping-cart.png" width="30" height="30"/>
         <image name="turn-right-sign.png" width="256" height="256"/>
     </resources>
 </document>

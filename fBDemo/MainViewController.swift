@@ -10,10 +10,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
    
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var serchBarview: UISearchBar!
+    @IBOutlet weak var tabBar: UITabBar!
     
      var arrRes = [[String:AnyObject]]() //Array of dictionary
     
@@ -34,6 +35,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tblView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tblView.delegate = (self as UITableViewDelegate)
         tblView.dataSource = (self as UITableViewDataSource)
+        
+        tabBar.delegate = self as! UITabBarDelegate
         
         self.navigationController?.isNavigationBarHidden = true
         
@@ -126,6 +129,24 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     
+    //MARK: UITabBarDelegate
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Selected item \(item.tag)")
+        
+        if(item.tag == 1){
+            let displayVC : CartViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+            self.present(displayVC, animated: true, completion: nil)
+        }else if(item.tag == 2){
+            let displayVC : OrderSummeryViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+            self.present(displayVC, animated: true, completion: nil)
+        }
+        
+        
+    }
+    
+   
+   
+
 
 }
 

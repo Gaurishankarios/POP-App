@@ -21,6 +21,8 @@ var resturantIdTest = 0
 var arrCardItem:Array<Any> = []
 var dictTest = Dictionary<String, Array<Any>>()
 var orderIDis = ""
+var fcmdeviceToken = ""
+var userIDofuser = 0
 
 
 
