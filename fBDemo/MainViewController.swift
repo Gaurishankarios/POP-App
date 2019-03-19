@@ -38,7 +38,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         tabBar.delegate = self as! UITabBarDelegate
         
-        self.navigationController?.isNavigationBarHidden = true
+//        self.navigationController?.isNavigationBarHidden = false
         
         serchBarview.delegate = self
         

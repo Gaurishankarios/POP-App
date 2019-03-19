@@ -30,6 +30,7 @@
 		A54E382A221EBE440029D9DE /* HotelCover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A54E3829221EBE430029D9DE /* HotelCover.jpg */; };
 		A5605EE6223A63BC0044F003 /* OrderSummeryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5605EE5223A63BC0044F003 /* OrderSummeryViewController.swift */; };
 		A5605EE8223A94700044F003 /* inline.png in Resources */ = {isa = PBXBuildFile; fileRef = A5605EE7223A946C0044F003 /* inline.png */; };
+		A57F458F2240E97A00BF951F /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F458E2240E97A00BF951F /* MyAPIClient.swift */; };
 		A585F5F722240700003376ED /* add-to-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = A585F5F622240700003376ED /* add-to-cart.png */; };
 		A585F5F92224218A003376ED /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A585F5F82224218A003376ED /* MenuViewController.swift */; };
 		A5913A73222D4ABD00DB98F5 /* ShowQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5913A72222D4ABD00DB98F5 /* ShowQRViewController.swift */; };
@@ -63,6 +64,7 @@
 		A54E3829221EBE430029D9DE /* HotelCover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HotelCover.jpg; sourceTree = "<group>"; };
 		A5605EE5223A63BC0044F003 /* OrderSummeryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummeryViewController.swift; sourceTree = "<group>"; };
 		A5605EE7223A946C0044F003 /* inline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inline.png; sourceTree = "<group>"; };
+		A57F458E2240E97A00BF951F /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
 		A585F5F622240700003376ED /* add-to-cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add-to-cart.png"; sourceTree = "<group>"; };
 		A585F5F82224218A003376ED /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		A5913A72222D4ABD00DB98F5 /* ShowQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowQRViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				A5913A72222D4ABD00DB98F5 /* ShowQRViewController.swift */,
 				A5605EE5223A63BC0044F003 /* OrderSummeryViewController.swift */,
 				A51C77A02227C683001DFD90 /* Constant.swift */,
+				A57F458E2240E97A00BF951F /* MyAPIClient.swift */,
 				A53E7E94221AB5C900D6000E /* Main.storyboard */,
 				A585F5FA222421AF003376ED /* supportdata */,
 				A53E7E97221AB5D800D6000E /* Assets.xcassets */,
@@ -302,6 +305,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -319,6 +323,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -342,6 +347,7 @@
 				A51C77A922282B4E001DFD90 /* CartViewController.swift in Sources */,
 				A5913A73222D4ABD00DB98F5 /* ShowQRViewController.swift in Sources */,
 				A585F5F92224218A003376ED /* MenuViewController.swift in Sources */,
+				A57F458F2240E97A00BF951F /* MyAPIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

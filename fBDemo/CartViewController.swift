@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Stripe
 
 class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
 
@@ -25,6 +26,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private let cellReuseIdentifier: String = "cell"
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,6 +40,9 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         tabBar.delegate = self
         
+//        let alertController = UIAlertController()
+        
+        
        amountCalculate()
         
         print("arrquantity is \(String(describing: arrquantity))")
@@ -44,6 +50,12 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         print("arrprice is \(String(describing: arrprice))")
         print("arrlistNo is \(String(describing: arrlistNo)) \(String(describing: arrlistNo?.count))")
         
+//        self.navigationController?.navigationBar.isHidden = false
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        let addCardViewController = STPAddCardViewController()
+        addCardViewController.delegate = self as? STPAddCardViewControllerDelegate
     }
     
     //MARK: TableViewData source
@@ -191,7 +203,10 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             
         }
+        stripeTotal = total
     }
+    
+    
     
     @IBAction func btnBackPress(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -218,11 +233,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
 
         }
-        
-        
     }
-    
-
     
     //MARK: tab bar delegate
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -238,14 +249,67 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @IBAction func btnPayNowPress(_ sender: Any) {
+        
+        let addCardViewController = STPAddCardViewController()
+        addCardViewController.delegate = self as? STPAddCardViewControllerDelegate
+        let navigationController = UINavigationController(rootViewController: addCardViewController)
+        self.present(navigationController, animated: true, completion: nil)
+//        navigationController.pushViewController(addCardViewController, animated: true)
     }
-    */
-
+}
+//MARK: Extension
+extension CartViewController: STPAddCardViewControllerDelegate {
+    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    func addCardViewController(_ addCardViewController: STPAddCardViewController,
+                               didCreateToken token: STPToken,
+                               completion: @escaping STPErrorBlock) {
+        MyAPIClient.sharedClient.completeCharge(with: token, amount: 100) { result in
+            switch result {
+            // 1
+            case .success:
+                completion(nil)
+                
+//                var alert = AlertController()
+//                alert.showAlert()
+                
+                let alertController = UIAlertController(title: "Congrats", message: "Your payment was successful!", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .default, handler: { _ in
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    let url = GVBaseURL + "order/addOrder" // This will be your link
+                    let parameters: Parameters = ["userId": userIDofuser, "restaurantId": resturantId, "menuId": dictTest["menuId"]!, "quantity": dictTest["quantity"]!, "totalPrice": "$\(self.total)", "paymentStatus": "True", "orderStartTime": "asassa" ]      //This will be your parameter
+                    print("\(parameters)")
+                    Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+                        print(response)
+                        
+                        let swiftyJsonVar = JSON(response.result.value!)
+                        
+                        if let name = swiftyJsonVar["orderId"].string {
+                            // get name
+                            orderIDis = name
+                            
+                            print("\(name)")
+                            let displayVC : ShowQRViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShowQRViewController") as! ShowQRViewController
+                            self.present(displayVC, animated: true, completion: nil)
+                        }
+                        
+                    }
+                    
+                })
+                alertController.addAction(alertAction)
+//                self.present(alertController, animated: true)
+                addCardViewController.present(alertController, animated: true, completion: nil)
+            // 2
+            case .failure(let error):
+                completion(error)
+            }
+        }
+        
+        
+        
+    }
 }

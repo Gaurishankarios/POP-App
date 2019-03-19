@@ -19,6 +19,7 @@ import FirebaseMessaging
 
 import Alamofire
 import SwiftyJSON
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -29,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        
+        STPPaymentConfiguration.shared().publishableKey = "pk_test_BcZyK4UvTBD8PjzJprZ1Ps5Z"
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -59,12 +63,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
 //            rootViewController.pushViewController(profileViewController, animated: true)
 //        }
         
-        let tmpvar = UserDefaults.standard.string(forKey: "userId")
-        let tmp2 = Int(tmpvar!)
-        userIDofuser = tmp2!
-         print("data is \(userIDofuser)")
+        
         
         if status{
+            
+            let tmpvar = UserDefaults.standard.string(forKey: "userId")
+            let tmp2 = Int(tmpvar!)
+            userIDofuser = tmp2!
+            print("data is \(userIDofuser)")
+            
             let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
             
 //             let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController

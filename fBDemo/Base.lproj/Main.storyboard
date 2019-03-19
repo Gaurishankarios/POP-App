@@ -111,6 +111,21 @@
             </objects>
             <point key="canvasLocation" x="1781.5999999999999" y="133.5832083958021"/>
         </scene>
+        <!--Add Card View Controller-->
+        <scene sceneID="NyQ-dd-lFc">
+            <objects>
+                <viewController storyboardIdentifier="STPAddCardViewController" id="AgF-qP-D2G" customClass="STPAddCardViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="S21-3Z-DLU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="YHp-lB-x2E"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7nn-dq-8n8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1386" y="851"/>
+        </scene>
         <!--Menu View Controller-->
         <scene sceneID="Omx-lW-9mB">
             <objects>
@@ -146,7 +161,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="add-to-cart.png"/>
                                 <connections>
-                                    <segue destination="QhK-k4-7b6" kind="show" identifier="MenuToCart" id="XIa-tD-HWS"/>
+                                    <action selector="btnShowCartPress:" destination="LnW-nZ-uHS" eventType="touchUpInside" id="zgR-St-Gwo"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbQ-sk-aUC">
@@ -261,6 +276,9 @@
                                 <state key="normal" title="PAY NOW">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnPayNowPress:" destination="QhK-k4-7b6" eventType="touchUpInside" id="7BQ-OU-qIO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KB1-iZ-RVo">
                                 <rect key="frame" x="16" y="33" width="35" height="34"/>

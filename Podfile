@@ -21,4 +21,6 @@ pod 'Firebase/Messaging'
 pod 'Alamofire'
 pod 'SwiftyJSON'
 
+pod 'Stripe'
+
 end

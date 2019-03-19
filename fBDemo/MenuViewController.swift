@@ -66,7 +66,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             lblcartNum.text = "\(countofCart)"
         }
         
-         self.navigationController?.isNavigationBarHidden = false
+//         self.navigationController?.isNavigationBarHidden = false
         
 //        let urlMenuCatagory = GVBaseURL + "restaurantmenu/selectbyid/\(resturantId)/\(catagoryId)"
         let urllink = GVBaseURL+"restaurantmenu/selectbyid/\(resturantId)/1001"
@@ -405,5 +405,14 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
 
    
-
+    @IBAction func btnShowCartPress(_ sender: Any) {
+        
+        let displayVC : CartViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+        let navigationController = UINavigationController(rootViewController: displayVC)
+//        self.present(displayVC, animated: true, completion: nil)
+//        navigationController.pushViewController(navigationController, animated: true)
+        self.present(navigationController, animated: true, completion: nil)
+        
+    }
+    
 }
