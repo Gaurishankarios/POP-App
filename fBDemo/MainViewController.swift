@@ -25,11 +25,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dictTest["price"] = []
-        dictTest["menuId"] = []
-        dictTest["quantity"] = []
-        dictTest["menuItemName"] = []
-        dictTest["restID"] = []
+        tabBar.selectedItem = tabBar.items![0]
+        
+        if dictTest.count < 1{
+            dictTest["price"] = []
+            dictTest["menuId"] = []
+            dictTest["quantity"] = []
+            dictTest["menuItemName"] = []
+            dictTest["restID"] = []
+        }
 
         // Do any additional setup after loading the view.
         tblView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")

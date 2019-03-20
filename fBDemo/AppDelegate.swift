@@ -72,6 +72,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
             userIDofuser = tmp2!
             print("data is \(userIDofuser)")
             
+            
+//            if (launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? NSDictionary) != nil {
+//                let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+//            }else{
+//                let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+//            }
+            
+            
             let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
             
 //             let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
@@ -89,11 +97,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUser
         return true
     }
     
-    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler([.alert, .badge, .sound])
+        
+        let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = testController
+    }
     // The callback to handle data message received via FCM for devices running iOS 10 or above.
     func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
         print(remoteMessage.appData)
-            
+        
+        let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = testController
+     
+//        (window?.rootViewController as? OrderSummeryViewController)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {

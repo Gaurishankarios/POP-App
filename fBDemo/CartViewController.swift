@@ -33,6 +33,8 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         print("cart data is \(dictTest)")
         
+       tabBar.selectedItem = tabBar.items![1]
+        
         tblCart.delegate = self
         tblCart.dataSource = self
         // Do any additional setup after loading the view.
@@ -42,8 +44,10 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
 //        let alertController = UIAlertController()
         
-        
-       amountCalculate()
+        if dictTest.count > 1{
+             amountCalculate()
+        }
+      
         
         print("arrquantity is \(String(describing: arrquantity))")
         print("menuList is \(String(describing: arrMenulist))")
@@ -56,6 +60,10 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidAppear(_ animated: Bool) {
         let addCardViewController = STPAddCardViewController()
         addCardViewController.delegate = self as? STPAddCardViewControllerDelegate
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        tblCart.reloadData()
     }
     
     //MARK: TableViewData source

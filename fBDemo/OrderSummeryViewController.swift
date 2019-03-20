@@ -23,6 +23,7 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tabBar.selectedItem = tabBar.items![2]
         
         tblorderSummery.delegate = self
         tblorderSummery.dataSource = self
@@ -31,7 +32,7 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
         tabBar.delegate = self
         
 //        http://192.168.1.164:8181/api/ordersummary/getorderSummary/1012019.03.12.16.33.47121
-         let urllink = GVBaseURL+"ordersummary/getorderSummary/\(orderIDis)"
+         let urllink = GVBaseURL+"ordersummary/getorderSummary/\(userIDofuser)"
         print(urllink)
         Alamofire.request(urllink).responseJSON { (responseData) -> Void in
             if((responseData.result.value) != nil) {
