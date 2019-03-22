@@ -100,7 +100,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
                 let btnsubtract = UIButton(frame: CGRect(x: lblName.frame.origin.x+lblName.frame.size.width+5, y: 5, width: 30, height: 30))
                 btnsubtract.setTitle("-", for: UIControl.State.normal)
-                btnsubtract.backgroundColor = UIColor.red
+                btnsubtract.backgroundColor = UIColor.green //UIColor(red: 0.72, green: 0.74, blue: 0.4, alpha: 1)
                 btnsubtract.layer.cornerRadius = 15
                 btnsubtract.tag = indexPath.row
                 btnsubtract.addTarget(self, action: #selector(btnSubstractPress), for: UIControl.Event.touchUpInside)
@@ -116,7 +116,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
                 let btnadd = UIButton(frame: CGRect(x: lblNumber.frame.origin.x+lblNumber.frame.size.width, y: 5, width: 30, height: 30))
                 btnadd.setTitle("+", for: UIControl.State.normal)
-                btnadd.backgroundColor = UIColor.red
+                btnadd.backgroundColor = UIColor.green
                 btnadd.layer.cornerRadius = 15
                 btnadd.tag = indexPath.row
                 btnadd.addTarget(self, action: #selector(btnAddPress), for: UIControl.Event.touchUpInside)
@@ -238,6 +238,17 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 print("\(name)")
                 let displayVC : ShowQRViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShowQRViewController") as! ShowQRViewController
                 self.present(displayVC, animated: true, completion: nil)
+                
+                
+                dictTest.removeAll()
+                print("data is remove \(dictTest)")
+                dictTest["price"] = []
+                dictTest["menuId"] = []
+                dictTest["quantity"] = []
+                dictTest["menuItemName"] = []
+                dictTest["restID"] = []
+                countofCart = 0
+                resturantIdTest = 0
             }
 
         }
@@ -303,6 +314,16 @@ extension CartViewController: STPAddCardViewControllerDelegate {
                             print("\(name)")
                             let displayVC : ShowQRViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ShowQRViewController") as! ShowQRViewController
                             self.present(displayVC, animated: true, completion: nil)
+                            
+                            dictTest.removeAll()
+                            print("data is remove \(dictTest)")
+                            dictTest["price"] = []
+                            dictTest["menuId"] = []
+                            dictTest["quantity"] = []
+                            dictTest["menuItemName"] = []
+                            dictTest["restID"] = []
+                            countofCart = 0
+                            resturantIdTest = 0
                         }
                         
                     }

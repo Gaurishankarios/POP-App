@@ -201,6 +201,8 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 imageUrlString = GVImageBaseURL + imageUrlString
                  let imageUrl:URL = URL(string: imageUrlString)!
         
+                imgMenus.image = UIImage(named: "loader.png")
+        
                 // Start background thread so that image loading does not make app unresponsive
                 DispatchQueue.global(qos: .userInitiated).async {
                     
@@ -213,6 +215,16 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     }
                 }
         cell.addSubview(imgMenus)
+        
+        let lblPricetag = UILabel(frame: CGRect(x: UIScreen.main.bounds.size.width-130, y: 0, width: 90, height: 40))
+        lblPricetag.backgroundColor = UIColor.yellow
+        lblPricetag.layer.cornerRadius = 30
+        lblPricetag.layer.maskedCorners = [ .layerMinXMaxYCorner]
+        lblPricetag.clipsToBounds = true
+        lblPricetag.text = "  \(String(describing: dict["price"]!))"
+        lblPricetag.font = lblPricetag.font.withSize(25)
+        imgMenus.addSubview(lblPricetag)
+        
         
         let lblNumber = UILabel(frame: CGRect(x: 10, y: 10, width: 50, height: 40))
         lblNumber.backgroundColor = UIColor.lightText

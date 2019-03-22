@@ -172,7 +172,7 @@
                                     <action selector="btnBackPress:" destination="LnW-nZ-uHS" eventType="touchUpInside" id="BFO-We-0XJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-SY-l0x">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KhO-SY-l0x">
                                 <rect key="frame" x="336" y="32" width="23" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -479,6 +479,9 @@
                         <viewLayoutGuide key="safeArea" id="hDP-Wt-p1I"/>
                     </view>
                     <connections>
+                        <outlet property="imgOrder" destination="6KR-0U-X4X" id="NWh-Pg-C9I"/>
+                        <outlet property="lblETAstatus" destination="bcj-bt-8lt" id="uDk-RW-NXY"/>
+                        <outlet property="lblOrderstatus" destination="EnS-J1-V4V" id="733-4R-8cw"/>
                         <outlet property="tabBar" destination="Gzh-9D-TsD" id="Fqq-PO-hf6"/>
                         <outlet property="tblorderSummery" destination="g9W-bs-ZOe" id="d3o-rf-ZvG"/>
                     </connections>

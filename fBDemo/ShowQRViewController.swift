@@ -21,13 +21,15 @@ class ShowQRViewController: UIViewController {
         let image = generateQRCode(from: orderIDis)
         imgQRCode.image = image
         
-        dictTest.removeAll()
-        print("data is remove \(dictTest)")
-        dictTest["price"] = []
-        dictTest["menuId"] = []
-        dictTest["quantity"] = []
-        dictTest["menuItemName"] = []
-        dictTest["restID"] = []
+//        dictTest.removeAll()
+//        print("data is remove \(dictTest)")
+//        dictTest["price"] = []
+//        dictTest["menuId"] = []
+//        dictTest["quantity"] = []
+//        dictTest["menuItemName"] = []
+//        dictTest["restID"] = []
+//        
+//        countofCart = 0
     }
     
     

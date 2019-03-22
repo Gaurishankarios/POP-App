@@ -28,6 +28,9 @@
 		A54E3826221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png in Resources */ = {isa = PBXBuildFile; fileRef = A54E3825221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png */; };
 		A54E3828221EB4A80029D9DE /* arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png in Resources */ = {isa = PBXBuildFile; fileRef = A54E3827221EB4A80029D9DE /* arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png */; };
 		A54E382A221EBE440029D9DE /* HotelCover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A54E3829221EBE430029D9DE /* HotelCover.jpg */; };
+		A54FC8E02244EC80003834F8 /* loader.png in Resources */ = {isa = PBXBuildFile; fileRef = A54FC8DF2244EC80003834F8 /* loader.png */; };
+		A54FC8E222452F34003834F8 /* cooking.png in Resources */ = {isa = PBXBuildFile; fileRef = A54FC8E122452F34003834F8 /* cooking.png */; };
+		A54FC8E4224530CC003834F8 /* spaghetti.png in Resources */ = {isa = PBXBuildFile; fileRef = A54FC8E3224530CC003834F8 /* spaghetti.png */; };
 		A5605EE6223A63BC0044F003 /* OrderSummeryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5605EE5223A63BC0044F003 /* OrderSummeryViewController.swift */; };
 		A5605EE8223A94700044F003 /* inline.png in Resources */ = {isa = PBXBuildFile; fileRef = A5605EE7223A946C0044F003 /* inline.png */; };
 		A57F458F2240E97A00BF951F /* MyAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F458E2240E97A00BF951F /* MyAPIClient.swift */; };
@@ -62,6 +65,9 @@
 		A54E3825221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconmonstr-location-pin-thin.png"; sourceTree = "<group>"; };
 		A54E3827221EB4A80029D9DE /* arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png"; sourceTree = "<group>"; };
 		A54E3829221EBE430029D9DE /* HotelCover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HotelCover.jpg; sourceTree = "<group>"; };
+		A54FC8DF2244EC80003834F8 /* loader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loader.png; sourceTree = "<group>"; };
+		A54FC8E122452F34003834F8 /* cooking.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cooking.png; sourceTree = "<group>"; };
+		A54FC8E3224530CC003834F8 /* spaghetti.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spaghetti.png; sourceTree = "<group>"; };
 		A5605EE5223A63BC0044F003 /* OrderSummeryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSummeryViewController.swift; sourceTree = "<group>"; };
 		A5605EE7223A946C0044F003 /* inline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inline.png; sourceTree = "<group>"; };
 		A57F458E2240E97A00BF951F /* MyAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAPIClient.swift; sourceTree = "<group>"; };
@@ -146,6 +152,9 @@
 			children = (
 				A51C77A6222824AE001DFD90 /* callNow.png */,
 				A549C53F223FF08800BAA6FC /* home-4.png */,
+				A54FC8E122452F34003834F8 /* cooking.png */,
+				A54FC8E3224530CC003834F8 /* spaghetti.png */,
+				A54FC8DF2244EC80003834F8 /* loader.png */,
 				A549C543223FF20200BAA6FC /* bill.png */,
 				A549C545223FF35200BAA6FC /* avatar.png */,
 				A5605EE7223A946C0044F003 /* inline.png */,
@@ -232,11 +241,14 @@
 				A549C540223FF08900BAA6FC /* home-4.png in Resources */,
 				A51C77A5222823E4001DFD90 /* turn-right-sign.png in Resources */,
 				A585F5F722240700003376ED /* add-to-cart.png in Resources */,
+				A54FC8E4224530CC003834F8 /* spaghetti.png in Resources */,
 				A51C77A32228216D001DFD90 /* placeholder.png in Resources */,
 				A54E3828221EB4A80029D9DE /* arrow__down__arrow-down__dropdown__download__chevron-down__set-512.png in Resources */,
+				A54FC8E222452F34003834F8 /* cooking.png in Resources */,
 				A5605EE8223A94700044F003 /* inline.png in Resources */,
 				A5306FEF22267D1A00FD6C35 /* back-navigational.png in Resources */,
 				A5437204221BD81F00532472 /* GoogleService-Info.plist in Resources */,
+				A54FC8E02244EC80003834F8 /* loader.png in Resources */,
 				A53E7E96221AB5C900D6000E /* Main.storyboard in Resources */,
 				A54E3826221EB3FD0029D9DE /* iconmonstr-location-pin-thin.png in Resources */,
 				A51C77A7222824AF001DFD90 /* callNow.png in Resources */,

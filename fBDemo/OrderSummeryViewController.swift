@@ -12,6 +12,12 @@ import SwiftyJSON
 
 
 class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITabBarDelegate {
+    @IBOutlet weak var lblETAstatus: UILabel!
+    
+    @IBOutlet weak var lblOrderstatus: UILabel!
+    
+    @IBOutlet weak var imgOrder: UIImageView!
+    
     
     var arrRes = [[String:AnyObject]]()
     private let cellReuseIdentifier: String = "cell"
@@ -45,9 +51,26 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
                 }
                 if self.arrRes.count>0{
                     self.tblorderSummery.reloadData()
+                    let tmp = self.arrRes[0]["orderStatus"]!
+                    print("order status is \(tmp)")
+                    
+                    if tmp as! String == "New Order"{
+                        self.lblOrderstatus.text = "Your order is in inline.."
+                        self.lblETAstatus.text = " "
+                    }else if tmp as! String == "In Progress"{
+                        self.lblOrderstatus.text = "The chef is doing his magic"
+                        self.lblETAstatus.text = " "
+                        self.imgOrder.image = UIImage(named: "cooking.png")
+                    }else if tmp as! String == "Ready"{
+                        self.lblOrderstatus.text = "Your Food is waiting for you"
+                        self.lblETAstatus.text = " "
+                        self.imgOrder.image = UIImage(named: "spaghetti.png")
+                    }
                 }
             }
         }
+        
+        
     }
     
 

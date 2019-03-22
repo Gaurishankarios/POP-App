@@ -77,6 +77,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var dict = arrRes[indexPath.row]
         
         let imgHotel = UIImageView(frame: CGRect(x: 20, y: 5, width: UIScreen.main.bounds.size.width-40, height: 170) )
+        
+        imgHotel.image = UIImage(named: "loader")
+        
         var imageUrlString = dict["restaurantImage"]as! String
         imageUrlString =  GVImageBaseURL + imageUrlString
         let imageUrl:URL = URL(string: imageUrlString)!
