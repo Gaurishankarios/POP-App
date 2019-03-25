@@ -15,6 +15,9 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     @IBOutlet weak var tblCart: UITableView!
     @IBOutlet weak var tabBar: UITabBar!
+    @IBOutlet weak var lblRestName: UILabel!
+    @IBOutlet weak var lblRestAddr: UILabel!
+    @IBOutlet weak var imgHotel: UIImageView!
     
     let arrMenulist = dictTest["menuItemName"]
     let arrquantity = dictTest["quantity"]
@@ -25,6 +28,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     private let cellReuseIdentifier: String = "cell"
     
+    var arrRes = [[String:AnyObject]]()
     
     
     
@@ -55,6 +59,46 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         print("arrlistNo is \(String(describing: arrlistNo)) \(String(describing: arrlistNo?.count))")
         
 //        self.navigationController?.navigationBar.isHidden = false
+        
+        
+        let urllink = GVBaseURL+"restaurant/selectbyid/\(resturantId)"
+        print(urllink)
+        Alamofire.request(urllink).responseJSON { (responseData) -> Void in
+            if((responseData.result.value) != nil) {
+                let swiftyJsonVar = JSON(responseData.result.value!)
+                print(swiftyJsonVar)
+                
+//                self.arrRes = swiftyJsonVar.object
+                if let resData = swiftyJsonVar.arrayObject{
+                    self.arrRes = resData as! [[String:AnyObject]]
+                    print("data is as follow \(self.arrRes) \(self.arrRes.count)")
+                }
+                 if self.arrRes.count>0{
+                    var imageUrlString = self.arrRes[0]["restaurantImage"] as! String
+                    self.lblRestName.text = self.arrRes[0]["restaurantName"] as? String
+                    self.lblRestAddr.text = self.arrRes[0]["restaurantArea"] as? String
+                    
+                    imageUrlString =  GVImageBaseURL + imageUrlString
+                    let imageUrl:URL = URL(string: imageUrlString)!
+                    // Start background thread so that image loading does not make app unresponsive
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        
+                        let imageData:NSData = NSData(contentsOf: imageUrl)!
+                        
+                        
+                        // When from background thread, UI needs to be updated on main_queue
+                        DispatchQueue.main.async {
+                            let image = UIImage(data: imageData as Data)
+                            self.imgHotel.image = image
+                            self.imgHotel.contentMode = UIView.ContentMode.scaleAspectFit
+                            
+                        }
+                    }
+                    
+                }
+            }
+        }
         
     }
     override func viewDidAppear(_ animated: Bool) {

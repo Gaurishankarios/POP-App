@@ -18,6 +18,11 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var imgOrder: UIImageView!
     
+    @IBOutlet weak var imgHotel: UIImageView!
+    @IBOutlet weak var restName: UILabel!
+    @IBOutlet weak var restAddr: UILabel!
+    @IBOutlet weak var lblTrestName: UILabel!
+    @IBOutlet weak var lblTrestAddr: UILabel!
     
     var arrRes = [[String:AnyObject]]()
     private let cellReuseIdentifier: String = "cell"
@@ -34,6 +39,8 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
         tblorderSummery.delegate = self
         tblorderSummery.dataSource = self
         tblorderSummery.register(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        
+        imgHotel.image = UIImage(named: "loader")
         
         tabBar.delegate = self
         
@@ -52,6 +59,11 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
                 if self.arrRes.count>0{
                     self.tblorderSummery.reloadData()
                     let tmp = self.arrRes[0]["orderStatus"]!
+                    var imageUrlString = self.arrRes[0]["restaurantImage"] as! String
+                    self.restName.text = self.arrRes[0]["restaurantName"] as? String
+                    self.lblTrestName.text = self.restName.text
+                    self.restAddr.text = self.arrRes[0]["restaurantArea"] as? String
+                    self.lblTrestAddr.text = self.restAddr.text
                     print("order status is \(tmp)")
                     
                     if tmp as! String == "New Order"{
@@ -66,6 +78,26 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
                         self.lblETAstatus.text = " "
                         self.imgOrder.image = UIImage(named: "spaghetti.png")
                     }
+                    
+                    
+                     imageUrlString =  GVImageBaseURL + imageUrlString
+                    let imageUrl:URL = URL(string: imageUrlString)!
+                    // Start background thread so that image loading does not make app unresponsive
+                    
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        
+                        let imageData:NSData = NSData(contentsOf: imageUrl)!
+                        
+                        
+                        // When from background thread, UI needs to be updated on main_queue
+                        DispatchQueue.main.async {
+                            let image = UIImage(data: imageData as Data)
+                            self.imgHotel.image = image
+                            self.imgHotel.contentMode = UIView.ContentMode.scaleAspectFit
+                            
+                        }
+                    }
+                    
                 }
             }
         }
@@ -142,7 +174,44 @@ class OrderSummeryViewController: UIViewController, UITableViewDataSource, UITab
         
     }
     
+    @IBAction func btnCallNowPress(_ sender: Any) {
+        let tmpstr = arrRes[0]["restaurantPhoneNo"]
+        dialNumber(number: tmpstr as! String)
+    }
+    func dialNumber(number : String) {
+        
+        if let url = URL(string: "tel://\(number)"),
+            UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler:nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        } else {
+            // add error message here
+        }
+    }
+    
+    @IBAction func btnGetDirectionPress(_ sender: Any) {
+        
+        let primaryContactFullAddress = arrRes[0]["restaurantArea"]
+        let testURL: NSURL = NSURL(string: "comgooglemaps-x-callback://")!
+        if UIApplication.shared.canOpenURL(testURL as URL) {
+            if let address = primaryContactFullAddress?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+                let directionsRequest: String = "comgooglemaps-x-callback://" + "?daddr=\(address)" + "&x-success=sourceapp://?resume=true&x-source=AirApp"
+                let directionsURL: NSURL = NSURL(string: directionsRequest)!
+                let application:UIApplication = UIApplication.shared
+                if (application.canOpenURL(directionsURL as URL)) {
+                    application.open(directionsURL as URL, options: [:], completionHandler: nil)
+                }
+            }
+        } else {
+            NSLog("Can't use comgooglemaps-x-callback:// on this device.")
+        }
+        
+    }
 }
+
 
    
 
