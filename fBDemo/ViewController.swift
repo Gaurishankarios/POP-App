@@ -11,6 +11,8 @@
     import FacebookCore
     import Firebase
     import GoogleSignIn
+    import Alamofire
+    import SwiftyJSON
     
 
     class ViewController: UIViewController,LoginButtonDelegate, GIDSignInUIDelegate {
@@ -60,12 +62,36 @@
             request.start { (response, result) in
                 switch result {
                 case .success(let value):
-                    print(value.dictionaryValue)
+                    print(value.dictionaryValue!["name"]!)
                     print("result is \(result)")
-                    let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController") as? MainViewController
-                    self.navigationController?.pushViewController(vc!, animated: true)
                     
-                    UserDefaults.standard.set(true, forKey: "userlogin")
+                    let url = "http://182.73.184.62:443/api/login/save" // This will be your link
+                    let parameters: Parameters = ["userEmailId": value.dictionaryValue!["email"]!, "deviceToken": fcmdeviceToken, "userName": value.dictionaryValue!["name"]!, "userRole": "user", "loginStatus": "true" ]      //This will be your parameter
+                    print("\(parameters)")
+                    Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+                        print(response)
+
+                        let swiftyJsonVar = JSON(response.result.value!)
+                        print("server data is  \(swiftyJsonVar)")
+                        
+                        
+                        if let name = swiftyJsonVar["userId"].string {
+                            // get name
+                            
+                            UserDefaults.standard.set(true, forKey: "userlogin")
+                            //                            UserDefaults.standard.set(name, forKey: "userId")
+                            UserDefaults.standard.set(name, forKey: "userId")
+                            userIDofuser = Int(name)!
+                            
+                            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "MainViewController") as? MainViewController
+                            self.navigationController?.pushViewController(vc!, animated: true)
+                            
+                           
+                        }
+                            
+                    }
+                    
+                   
                     
                 case .failed(let error):
                     print(error)

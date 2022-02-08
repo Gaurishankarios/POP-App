@@ -43,6 +43,8 @@
 	<string>SignINTest</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>comgooglemaps-x-callback</string>
+		<string>comgooglemaps</string>
 		<string>fbapi</string>
 		<string>fb-messenger-share-api</string>
 		<string>fbauth2</string>

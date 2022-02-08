@@ -12,8 +12,17 @@ import FacebookCore
 import Firebase
 import GoogleSignIn
 
+import UserNotifications
+import Firebase
+import FirebaseInstanceID
+import FirebaseMessaging
+
+import Alamofire
+import SwiftyJSON
+import Stripe
+
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
     var window: UIWindow?
 
@@ -21,6 +30,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        
+        STPPaymentConfiguration.shared().publishableKey = "pk_test_BcZyK4UvTBD8PjzJprZ1Ps5Z"
+        
+        if #available(iOS 10.0, *) {
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            // For iOS 10 data message (sent via FCM
+            Messaging.messaging().delegate = self
+        } else {
+            let settings: UIUserNotificationSettings =
+                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        
+        application.registerForRemoteNotifications()
+        
+//        FirebaseApp.configure()
+        
         
         let status = UserDefaults.standard.bool(forKey: "userlogin") ?? false
 //
@@ -31,21 +63,84 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 //            rootViewController.pushViewController(profileViewController, animated: true)
 //        }
         
+        
+        
         if status{
-            let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
             
-//             let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
+            let tmpvar = UserDefaults.standard.string(forKey: "userId")
+            let tmp2 = Int(tmpvar!)
+            userIDofuser = tmp2!
+            print("data is \(userIDofuser)")
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = testController
+            
+            
+            if (launchOptions?[UIApplication.LaunchOptionsKey.remoteNotification] as? NSDictionary) != nil {
+                let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = testController
+                
+            }else{
+                let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = testController
+            }
+            
+            
+//            let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.window?.rootViewController = testController
         }
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
         
+        
+        
         return true
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
+    {
+        completionHandler([.alert, .badge, .sound])
+        
+        let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = testController
+    }
+    // The callback to handle data message received via FCM for devices running iOS 10 or above.
+    func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
+        print(remoteMessage.appData)
+        
+        let testController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = testController
+     
+//        (window?.rootViewController as? OrderSummeryViewController)
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("token is \(token)")
+//        Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        print("Firebase registration token: \(fcmToken)")
+        
+        fcmdeviceToken = fcmToken
+        
+        let dataDict:[String: String] = ["token": fcmToken]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+
+    
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         let appId: String = SDKSettings.appId
@@ -95,12 +190,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
             }
             else{
                 
-                let rootViewController = self.window!.rootViewController as! UINavigationController
-                let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-                rootViewController.pushViewController(profileViewController, animated: true)
-                
-                
                 print("Google Authentification Success")
                 
                 let userId = user.userID                  // For client-side use only!
@@ -109,9 +198,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 let givenName = user.profile.givenName
                 let familyName = user.profile.familyName
                 let email = user.profile.email
-                print("user detail is \(String(describing: userId)) id token is \(String(describing: idToken)) \n full name is \(String(describing: fullName)) \n given name is \(String(describing: givenName)) \n family name is \(String(describing: familyName))\n email is \(String(describing: email))")
                 
-                UserDefaults.standard.set(true, forKey: "userlogin")
+                let url = "http://182.73.184.62:443/api/login/save" // This will be your link
+                let parameters: Parameters = ["userEmailId": email!, "deviceToken": fcmdeviceToken, "userName": fullName!, "userRole": "user", "loginStatus": "true" ]      //This will be your parameter
+                print("\(parameters)")
+                Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { response in
+                    print(response)
+                    
+                    let swiftyJsonVar = JSON(response.result.value!)
+                    print("server data is  \(swiftyJsonVar)")
+                    
+                    if let name = swiftyJsonVar["userId"].string {
+                        
+                        let rootViewController = self.window!.rootViewController as! UINavigationController
+                        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let profileViewController = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                        rootViewController.pushViewController(profileViewController, animated: true)
+                        
+                         UserDefaults.standard.set(true, forKey: "userlogin")
+                        UserDefaults.standard.set(name, forKey: "userId")
+                        
+                        userIDofuser = Int(name)!
+                        
+//                        print("user detail is \(String(describing: userId)) id token is \(String(describing: idToken)) \n full name is \(String(describing: fullName)) \n given name is \(String(describing: givenName)) \n family name is \(String(describing: familyName))\n email is \(String(describing: email))")
+                        
+                       
+                    }
+                }
+                
+                
+               
             }
             // User is signed in
             // ...

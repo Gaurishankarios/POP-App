@@ -10,10 +10,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITabBarDelegate {
    
     @IBOutlet weak var tblView: UITableView!
     @IBOutlet weak var serchBarview: UISearchBar!
+    @IBOutlet weak var tabBar: UITabBar!
     
      var arrRes = [[String:AnyObject]]() //Array of dictionary
     
@@ -23,13 +24,25 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tabBar.selectedItem = tabBar.items![0]
+        
+        if dictTest.count < 1{
+            dictTest["price"] = []
+            dictTest["menuId"] = []
+            dictTest["quantity"] = []
+            dictTest["menuItemName"] = []
+            dictTest["restID"] = []
+        }
 
         // Do any additional setup after loading the view.
         tblView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tblView.delegate = (self as UITableViewDelegate)
         tblView.dataSource = (self as UITableViewDataSource)
         
-        self.navigationController?.isNavigationBarHidden = true
+        tabBar.delegate = self as! UITabBarDelegate
+        
+//        self.navigationController?.isNavigationBarHidden = false
         
         serchBarview.delegate = self
         
@@ -64,7 +77,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         var dict = arrRes[indexPath.row]
         
         let imgHotel = UIImageView(frame: CGRect(x: 20, y: 5, width: UIScreen.main.bounds.size.width-40, height: 170) )
-        var imageUrlString = dict["resturantImage"]as! String
+        
+        imgHotel.image = UIImage(named: "loader")
+        
+        var imageUrlString = dict["restaurantImage"]as! String
         imageUrlString =  GVImageBaseURL + imageUrlString
         let imageUrl:URL = URL(string: imageUrlString)!
         // Start background thread so that image loading does not make app unresponsive
@@ -91,13 +107,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let lblHotelName = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width-40, height: 30))
         lblHotelName.backgroundColor = UIColor.white
-        lblHotelName.text = dict["resturantName"] as? String
+        lblHotelName.text = dict["restaurantName"] as? String
         lblHotelName.textColor = UIColor.gray
         lblHotelName.font = lblHotelName.font.withSize(20)
         tmpView.addSubview(lblHotelName)
         
         let lblHoteldesc = UILabel(frame: CGRect(x: 0, y: 30, width: UIScreen.main.bounds.size.width-40, height: 20))
-        lblHoteldesc.text = dict["resturantCuisine"] as? String
+        lblHoteldesc.text = dict["restaurantCuisine"] as? String
         lblHoteldesc.textColor = UIColor.gray
         lblHoteldesc.font = lblHotelName.font.withSize(12)
         tmpView.addSubview(lblHoteldesc)
@@ -115,11 +131,29 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 //        tblView.backgroundColor = UIColor.clear
         let displayVC : MenuViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
         displayVC.ddata = "Next level blog photo booth, tousled authentic tote bag kogi"
-        resturantId = dict["resturantId"] as! Int
+        resturantId = dict["restaurantId"] as! Int
         self.present(displayVC, animated: true, completion: nil)
     }
     
     
+    //MARK: UITabBarDelegate
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        print("Selected item \(item.tag)")
+        
+        if(item.tag == 1){
+            let displayVC : CartViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CartViewController") as! CartViewController
+            self.present(displayVC, animated: true, completion: nil)
+        }else if(item.tag == 2){
+            let displayVC : OrderSummeryViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "OrderSummeryViewController") as! OrderSummeryViewController
+            self.present(displayVC, animated: true, completion: nil)
+        }
+        
+        
+    }
+    
+   
+   
+
 
 }
 
