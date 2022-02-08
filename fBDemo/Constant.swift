@@ -32,3 +32,7 @@ let urlCatagorylink = "http://182.73.184.62:443/api/restaurantmenu/selectbyid/\(
 //http://182.73.184.62:443/api/restaurantmenu/selectbyid/\(resturantId)/\(catagoryId)
 //http://192.168.1.164:8080/api/restaurantmenu/selectbyid/\(resturantId)/\(catagoryId)
 
+
+
+// Demo test 
+
