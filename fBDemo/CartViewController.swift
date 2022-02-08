@@ -1,10 +1,4 @@
-//
-//  CartViewController.swift
-//  fBDemo
-//
-//  Created by Parvez Shaikh on 28/02/19.
-//  Copyright © 2019 Parvez Shaikh. All rights reserved.
-//
+
 
 import UIKit
 import Alamofire
